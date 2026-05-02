@@ -274,12 +274,12 @@ function ChartHero() {
 }
 
 const features = [
-  { color: "#7c3aed", bg: "#1a0a2e", title: "半導体バリューチェーン", body: "ファブレスからファウンドリ、装置・素材まで。世界の半導体産業を構造から分解する独自レポート。", tag: "Global · 150社" },
-  { color: "#0ea5e9", bg: "#0a1a2e", title: "マクロ・地政学分析", body: "米中対立・輸出規制・ドル体制の変容。市場構造に影響を与えるマクロ要因を深く読む。", tag: "Deep Analysis" },
-  { color: "#f59e0b", bg: "#1a140a", title: "日本株・個別企業分析", body: "TEL・アドバンテスト・ディスコ——現地フィールドワークと財務分析を組み合わせた日本株リサーチ。", tag: "Japan · 17社" },
-  { color: "#10b981", bg: "#0a1a14", title: "時価総額・業績トラッキング", body: "主要150社の時価総額・売上・成長率を一覧で比較。数字で語る企業の実力。", tag: "Interactive" },
-  { color: "#e04040", bg: "#1a0a0a", title: "競争優位（モート）分析", body: "なぜその企業が強いのか。特許・市場シェア・サプライチェーン支配力を本質から分析。", tag: "Moat" },
-  { color: "#8b5cf6", bg: "#120a1a", title: "企業間関係マッピング", body: "顧客・競合・製造委託——半導体エコシステムの相関図をインタラクティブに可視化。", tag: "Visual" },
+  { color: "#7c3aed", bg: "#1a0a2e", title: "日本の半導体バリューチェーン", body: "ファブレスからファウンドリ、装置・素材まで。日本の半導体産業まとめ", tag: "Global · 150社"　link: "https://japansemicondu.netlify.app/" },
+  { color: "#0ea5e9", bg: "#0a1a2e", title: "世界の半導体バリューチェーン", body: "ファブレスからファウンドリ、装置・素材まで。世界の半導体産業まとめ", tag: "Deep Analysis" link: "https://teal-melomakarona-306990.netlify.app/" },
+  { color: "#f59e0b", bg: "#1a140a", title: "日本株・信用残高一覧", body: "直近の信用残高のまとめ、複数銘柄を比較検討できる便利機能つき", tag: "Japan · 17社" link: "https://tradercat.site/report/show_margin.php" },
+  // { color: "#10b981", bg: "#0a1a14", title: "時価総額・業績トラッキング", body: "主要150社の時価総額・売上・成長率を一覧で比較。数字で語る企業の実力。", tag: "Interactive" },
+  // { color: "#e04040", bg: "#1a0a0a", title: "競争優位（モート）分析", body: "なぜその企業が強いのか。特許・市場シェア・サプライチェーン支配力を本質から分析。", tag: "Moat" },
+ //  { color: "#8b5cf6", bg: "#120a1a", title: "企業間関係マッピング", body: "顧客・競合・製造委託——半導体エコシステムの相関図をインタラクティブに可視化。", tag: "Visual" },
 ];
 
 const insights = [
