@@ -360,7 +360,7 @@ export default function App() {
       <div className="section-pad" style={{ padding: "24px 40px 56px" }}>
         <div style={{ fontSize: 10, letterSpacing: "0.3em", color: "#8080aa", textTransform: "uppercase", marginBottom: 10 }}>What we cover</div>
         <div style={{ fontSize: "clamp(20px,4vw,26px)", fontWeight: 700, color: "#e8e8f0", marginBottom: 28, letterSpacing: "-0.02em" }}>
-          投資家が知るべき、<span style={{ color: "#7c3aed" }}>構造的な視点</span>
+          主婦ならではの、<span style={{ color: "#7c3aed" }}>ユニークな視点</span>
         </div>
         <div className="feature-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10 }}>
           {features.map(f => (
