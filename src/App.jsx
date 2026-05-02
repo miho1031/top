@@ -255,14 +255,13 @@ function ChartHero() {
           <span style={{ fontSize: 10, color: "#b0a0dd", letterSpacing: "0.15em" }}>INDEPENDENT RESEARCH — 2026</span>
         </div>
         <h1 style={{ fontSize: "clamp(32px,6vw,50px)", fontWeight: 800, lineHeight: 1.05, letterSpacing: "-0.03em", marginBottom: 16, color: "#f0f0ff", fontFamily: "'Hiragino Sans','Noto Sans JP',sans-serif", opacity: 0, animation: "ci 0.6s 0.7s ease-out forwards" }}>
-          見えない回路を、<br/>
+          (WIP)見えない回路を、<br/>
           <span style={{ background: "linear-gradient(90deg,#c4b5fd,#818cf8,#60a5fa)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
             読み解く知性。
           </span>
         </h1>
         <p style={{ fontSize: "clamp(13px,2vw,15px)", color: "#9090bb", lineHeight: 1.8, marginBottom: 28, fontFamily: "'Hiragino Sans','Noto Sans JP',sans-serif", opacity: 0, animation: "ci 0.5s 1.2s ease-out forwards" }}>
-          半導体・地政学・日本株——構造を読む独立系リサーチ。<br/>
-          プロが見落とす非対称な優位を、あなたの投資判断に。
+         Work In Progress　只今制作中　<br>リリースまで今しばらくお待ちください
         </p>
         <div style={{ display: "flex", gap: 12, flexWrap: "wrap", opacity: 0, animation: "ci 0.5s 1.6s ease-out forwards" }}>
           <button style={{ background: "#7c3aed", color: "#fff", border: "none", padding: "13px 26px", borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>最新レポートを読む</button>
