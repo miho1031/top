@@ -1,0 +1,438 @@
+import { useState, useEffect, useRef } from "react";
+
+const typeLabels = {
+  up: { sign: "+", cls: "#34d399" },
+  dn: { sign: "-", cls: "#f87171" },
+  nt: { sign: "", cls: "#6b6b8a" },
+};
+
+// ── Ticker Bar ──────────────────────────────────────────
+function TickerBar({ items, speed }) {
+  const trackRef = useRef(null);
+  useEffect(() => {
+    const t = trackRef.current;
+    if (!t) return;
+    t.style.animation = "none";
+    void t.offsetWidth;
+    if (items.length > 0) t.style.animation = `tickScroll ${speed}s linear infinite`;
+  }, [items, speed]);
+
+  if (items.length === 0) return (
+    <div style={{ background: "#06060e", borderBottom: "1px solid #1e1e3a", padding: "10px 24px", fontSize: 11, color: "#3a3a5a", letterSpacing: "0.05em" }}>
+      ↓ 下の編集エリアから銘柄を追加してください
+    </div>
+  );
+
+  const Row = ({ arr }) => arr.map((x, i) => {
+    const t = typeLabels[x.dir];
+    const chg = x.chg ? `${t.sign}${x.chg}%` : "";
+    return (
+      <span key={i} style={{ display: "inline-flex", alignItems: "center", gap: 7, padding: "0 20px", borderRight: "1px solid #1e1e3a", fontSize: 11, flexShrink: 0 }}>
+        <span style={{ color: "#6b6b8a", fontWeight: 700, letterSpacing: "0.05em" }}>{x.sym}</span>
+        {x.val && <span style={{ color: "#c8c8e0", fontWeight: 600 }}>{x.val}</span>}
+        {chg && <span style={{ color: t.cls, fontWeight: 700 }}>{chg}</span>}
+      </span>
+    );
+  });
+
+  return (
+    <div style={{ background: "#06060e", borderBottom: "1px solid #1e1e3a", overflow: "hidden" }}>
+      <style>{`@keyframes tickScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}`}</style>
+      <div ref={trackRef} style={{ display: "flex", whiteSpace: "nowrap", padding: "10px 0" }}>
+        <Row arr={items} /><Row arr={items} />
+      </div>
+    </div>
+  );
+}
+
+// ── Ticker Editor ───────────────────────────────────────
+function TickerEditor({ items, setItems, speed, setSpeed }) {
+  const [sym, setSym] = useState("");
+  const [val, setVal] = useState("");
+  const [chg, setChg] = useState("");
+  const [dir, setDir] = useState("up");
+  const [open, setOpen] = useState(false);
+
+  const add = () => {
+    if (!sym.trim()) return;
+    setItems([...items, { id: Date.now(), sym: sym.trim(), val: val.trim(), chg: chg.trim(), dir }]);
+    setSym(""); setVal(""); setChg("");
+  };
+
+  const inp = { background: "#060610", border: "1px solid #1e1e3a", borderRadius: 4, color: "#c8c8e0", padding: "6px 10px", fontSize: 12, fontFamily: "inherit", outline: "none", width: 120 };
+  const speeds = [{ label: "遅い", val: 30 }, { label: "普通", val: 18 }, { label: "速い", val: 10 }];
+
+  return (
+    <div style={{ background: "#0d0d1a", border: "1px solid #1e1e3a", borderRadius: 8, overflow: "hidden" }}>
+      <div onClick={() => setOpen(!open)} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 16px", cursor: "pointer", borderBottom: open ? "1px solid #1e1e3a" : "none" }}>
+        <span style={{ fontSize: 10, color: "#4a4a6a", letterSpacing: "0.2em", textTransform: "uppercase" }}>Ticker Editor — 銘柄を編集</span>
+        <span style={{ fontSize: 12, color: "#3a3a5a" }}>{open ? "▲" : "▼"}</span>
+      </div>
+      {open && (
+        <div style={{ padding: "14px 16px" }}>
+          <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center", marginBottom: 10 }}>
+            <input value={sym} onChange={e => setSym(e.target.value)} onKeyDown={e => e.key === "Enter" && add()} placeholder="銘柄名 (例: NVDA)" style={inp} />
+            <input value={val} onChange={e => setVal(e.target.value)} placeholder="株価 (例: $947)" style={inp} />
+            <input value={chg} onChange={e => setChg(e.target.value)} onKeyDown={e => e.key === "Enter" && add()} placeholder="騰落率 (例: 3.2)" style={{ ...inp, width: 90 }} />
+            <select value={dir} onChange={e => setDir(e.target.value)} style={{ ...inp, width: "auto", cursor: "pointer" }}>
+              <option value="up">▲ プラス</option>
+              <option value="dn">▼ マイナス</option>
+              <option value="nt">— 変わらず</option>
+            </select>
+            <button onClick={add} style={{ background: "#7c3aed", border: "none", color: "#fff", padding: "6px 14px", borderRadius: 4, fontSize: 11, cursor: "pointer", fontFamily: "inherit", fontWeight: 700 }}>追加 +</button>
+            <button onClick={() => setItems([])} style={{ background: "transparent", border: "1px solid #1e1e3a", color: "#4a4a6a", padding: "6px 12px", borderRadius: 4, fontSize: 11, cursor: "pointer", fontFamily: "inherit" }}>全消去</button>
+          </div>
+          {items.length > 0 && (
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 12 }}>
+              {items.map(x => {
+                const t = typeLabels[x.dir];
+                return (
+                  <span key={x.id} style={{ display: "inline-flex", alignItems: "center", gap: 5, background: "#111120", border: "1px solid #1e1e3a", borderRadius: 4, padding: "3px 10px", fontSize: 11 }}>
+                    <span style={{ color: "#a0a0c0", fontWeight: 700 }}>{x.sym}</span>
+                    {x.val && <span style={{ color: "#c8c8e0" }}>{x.val}</span>}
+                    {x.chg && <span style={{ color: t.cls }}>{t.sign}{x.chg}%</span>}
+                    <span onClick={() => setItems(items.filter(i => i.id !== x.id))} style={{ color: "#3a3a5a", cursor: "pointer", fontSize: 14, lineHeight: 1 }}>×</span>
+                  </span>
+                );
+              })}
+            </div>
+          )}
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <span style={{ fontSize: 10, color: "#3a3a5a", letterSpacing: "0.1em" }}>スクロール速度:</span>
+            {speeds.map(s => (
+              <button key={s.val} onClick={() => setSpeed(s.val)} style={{ background: "transparent", border: `1px solid ${speed === s.val ? "#7c3aed" : "#1e1e3a"}`, color: speed === s.val ? "#c4b5fd" : "#4a4a6a", padding: "3px 10px", borderRadius: 3, fontSize: 10, cursor: "pointer", fontFamily: "inherit" }}>{s.label}</button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── Candlestick Hero ────────────────────────────────────
+function ChartHero() {
+  const candles = [
+    // [cx, wickTop, wickBot, bodyTop, bodyH, color, delay]
+    // 序盤・緩やか上昇
+    ["310","370","384","374","10","#34d399","0.08"],
+    ["326","345","368","356","8","#34d399","0.14"],
+    ["342","348","362","350","9","#f87171","0.20"],
+    ["358","332","356","342","2","#c8c8e0","0.26"], // 十字線
+    ["374","324","345","327","14","#34d399","0.32"],
+    ["390","318","352","338","11","#f87171","0.38"],
+    ["406","305","332","308","22","#34d399","0.44"],
+    ["422","288","318","296","8","#f87171","0.50"],
+    ["438","278","302","281","16","#34d399","0.56"],
+    ["454","270","298","282","2","#c8c8e0","0.62"], // 十字線
+    ["470","252","285","255","25","#34d399","0.68"],
+    ["486","238","265","241","18","#34d399","0.74"],
+    // 急騰
+    ["502","160","248","165","72","#34d399","0.80"],
+    ["520","118","182","122","48","#34d399","0.88"],
+    ["538","88","182","158","18","#f87171","0.96"], // 上影陰線・天井
+    // 急落
+    ["556","140","240","145","80","#f87171","1.04"],
+    ["574","198","295","202","48","#f87171","1.12"],
+    ["592","190","275","196","12","#34d399","1.20"], // からかさ
+    ["610","208","310","214","72","#f87171","1.28"],
+    // 乱高下レンジ
+    ["628","245","320","250","48","#34d399","1.36"],
+    ["646","230","302","264","28","#f87171","1.42"],
+    ["664","248","295","269","2","#c8c8e0","1.48"], // 十字線
+    ["682","242","320","248","52","#f87171","1.54"],
+    ["700","250","335","255","10","#34d399","1.60"], // からかさ
+    ["718","248","288","252","22","#f87171","1.66"],
+    ["736","244","285","262","2","#c8c8e0","1.72"], // 十字線
+    ["754","238","278","242","26","#34d399","1.78"],
+    ["772","222","282","258","18","#f87171","1.84"], // 逆からかさ
+    ["790","238","272","242","20","#34d399","1.90"],
+    ["808","228","278","248","22","#f87171","1.96"],
+  ];
+
+  const volBars = [
+    ["304","455","18","#b8860b","0.6","0.08"],["320","448","25","#b8860b","0.6","0.14"],
+    ["336","452","21","#b8860b","0.6","0.20"],["352","455","18","#b8860b","0.5","0.26"],
+    ["368","450","23","#b8860b","0.6","0.32"],["384","446","27","#b8860b","0.65","0.38"],
+    ["400","444","29","#b8860b","0.65","0.44"],["416","450","23","#b8860b","0.55","0.50"],
+    ["432","448","25","#b8860b","0.6","0.56"],["448","453","20","#b8860b","0.5","0.62"],
+    ["464","443","30","#b8860b","0.65","0.68"],["480","442","31","#b8860b","0.65","0.74"],
+    ["494","413","60","#d4a017","0.85","0.80"],["512","405","68","#d4a017","0.85","0.88"],
+    ["530","408","65","#d4a017","0.8","0.96"],["548","395","78","#e8b820","0.9","1.04"],
+    ["567","400","73","#e8b820","0.85","1.12"],["585","418","55","#d4a017","0.75","1.20"],
+    ["602","410","63","#e8b820","0.85","1.28"],["621","428","45","#b8860b","0.7","1.36"],
+    ["639","432","41","#b8860b","0.65","1.42"],["657","440","33","#b8860b","0.55","1.48"],
+    ["675","430","43","#b8860b","0.68","1.54"],["693","438","35","#b8860b","0.58","1.60"],
+    ["711","442","31","#b8860b","0.55","1.66"],["729","445","28","#b8860b","0.52","1.72"],
+    ["747","440","33","#b8860b","0.58","1.78"],["765","436","37","#b8860b","0.62","1.84"],
+    ["783","443","30","#b8860b","0.55","1.90"],["801","439","34","#b8860b","0.6","1.96"],
+    ["818","434","39","#d4a017","0.7","2.02"],
+  ];
+
+  return (
+    <div style={{ position: "relative", width: "100%", minHeight: 520, overflow: "hidden", background: "#0a0a0f", display: "flex", alignItems: "center" }}>
+      <style>{`
+        @keyframes ci{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes fy{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+        @keyframes sc{0%{transform:translateX(-4px)}100%{transform:translateX(910px)}}
+        @keyframes ml{from{stroke-dashoffset:1600}to{stroke-dashoffset:0}}
+        @keyframes vg{from{transform:scaleY(0);opacity:0}to{transform:scaleY(1);opacity:1}}
+        @keyframes dp{0%,100%{opacity:1}50%{opacity:0.25}}
+      `}</style>
+
+      {/* SVG Chart */}
+      <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }} viewBox="0 0 900 520" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="sg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="transparent"/>
+            <stop offset="40%" stopColor="#c4b5fd" stopOpacity="0.5"/>
+            <stop offset="60%" stopColor="#c4b5fd" stopOpacity="0.5"/>
+            <stop offset="100%" stopColor="transparent"/>
+          </linearGradient>
+          <filter id="gl"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <filter id="gl2"><feGaussianBlur stdDeviation="1.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+
+        {/* Grid */}
+        <g opacity="0.12">
+          {[75,155,235,315,395].map(y => <line key={y} x1="0" y1={y} x2="900" y2={y} stroke="#8080bb" strokeWidth="0.5"/>)}
+          {[200,380,560,740].map(x => <line key={x} x1={x} y1="50" x2={x} y2="420" stroke="#8080bb" strokeWidth="0.5"/>)}
+        </g>
+        {[["5000","79"],["3800","159"],["2600","239"],["1400","319"]].map(([v,y]) => (
+          <text key={v} x="856" y={y} fill="#333360" fontSize="10" fontFamily="monospace">{v}</text>
+        ))}
+
+        {/* 5日線 */}
+        <polyline fill="none" stroke="#fbbf24" strokeWidth="2" strokeLinejoin="round" opacity="0.85"
+          strokeDasharray="1600" strokeDashoffset="1600"
+          style={{ animation: "ml 2.5s 0.2s ease-out forwards" }}
+          points="310,365 326,358 342,352 358,340 374,330 390,344 406,320 422,308 438,295 454,318 470,285 486,260 502,220 520,168 538,130 556,175 574,225 592,205 610,240 628,270 646,248 664,280 682,258 700,285 718,262 736,278 754,255 772,268 790,252 808,265 826,248"/>
+        {/* 25日線 */}
+        <polyline fill="none" stroke="#60a5fa" strokeWidth="1.5" strokeLinejoin="round" opacity="0.6"
+          strokeDasharray="1600" strokeDashoffset="1600"
+          style={{ animation: "ml 2.5s 0.5s ease-out forwards" }}
+          points="310,385 340,375 370,362 400,348 430,330 460,310 490,285 520,262 550,245 580,238 610,245 640,258 670,270 700,282 730,292 760,298 790,302 820,304 850,306"/>
+
+        {/* ローソク足 */}
+        {candles.map(([cx, wt, wb, bt, bh, color, delay], i) => (
+          <g key={i} style={{ animation: `fu 0.2s ${delay}s both` }} filter={i===12||i===13?"url(#gl2)":undefined}>
+            <line x1={cx} y1={wt} x2={cx} y2={wb} stroke={color} strokeWidth={i>=12&&i<=14?"1.5":"1.2"}/>
+            <rect x={Number(cx)-6} y={bt} width={i>=12&&i<=14?16:12} height={bh} fill={color} rx="0.5" opacity="0.9"/>
+          </g>
+        ))}
+
+        {/* 現在足（形成中） */}
+        <g style={{ animation: "fu 0.3s 2.02s both" }} filter="url(#gl)">
+          <line x1="826" y1="232" x2="826" y2="278" stroke="#34d399" strokeWidth="1.5"/>
+          <rect x="818" y="236" width="16" height="28" fill="#34d399" rx="1" opacity="0.95"/>
+          <line x1="826" y1="226" x2="826" y2="232" stroke="#34d399" strokeWidth="1.5">
+            <animate attributeName="opacity" values="0.3;1;0.3" dur="0.9s" repeatCount="indefinite"/>
+          </line>
+        </g>
+        <circle cx="826" cy="232" r="4" fill="#34d399" filter="url(#gl)">
+          <animate attributeName="r" values="4;15;4" dur="2s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.8;0;0.8" dur="2s" repeatCount="indefinite"/>
+        </circle>
+
+        {/* 出来高（黄金色） */}
+        {volBars.map(([x, y, h, color, opacity, delay], i) => (
+          <rect key={i} x={x} y={y} width={i>=28?"16":"12"} height={h} fill={color} opacity={opacity} rx="0.5"
+            style={{ transformOrigin: `${Number(x)+6}px 473px`, animation: `vg 0.15s ${delay}s both` }}/>
+        ))}
+
+        {/* 価格タグ */}
+        <g style={{ animation: "fu 0.4s 2.2s both" }}>
+          <g style={{ animation: "fy 3s ease-in-out infinite" }}>
+            <rect x="675" y="56" width="92" height="28" rx="5" fill="#7c3aed" opacity="0.95" filter="url(#gl2)"/>
+            <rect x="675" y="56" width="92" height="28" rx="5" fill="none" stroke="#c4b5fd" strokeWidth="0.5" opacity="0.5"/>
+            <text x="721" y="75" textAnchor="middle" fill="#fff" fontSize="12" fontFamily="monospace" fontWeight="bold">¥1,928</text>
+          </g>
+        </g>
+        <g style={{ animation: "fu 0.4s 2.4s both" }}>
+          <g style={{ animation: "fy 3.5s 0.5s ease-in-out infinite" }}>
+            <rect x="712" y="90" width="66" height="20" rx="4" fill="#34d399" opacity="0.92" filter="url(#gl2)"/>
+            <text x="745" y="104" textAnchor="middle" fill="#064e3b" fontSize="11" fontFamily="monospace" fontWeight="bold">+3.74%</text>
+          </g>
+        </g>
+
+        {/* MAラベル */}
+        <g style={{ animation: "fu 0.3s 2.6s both" }}>
+          <rect x="495" y="145" width="54" height="16" rx="3" fill="#0d0d1a" stroke="#fbbf24" strokeWidth="0.5" opacity="0.9"/>
+          <text x="522" y="157" textAnchor="middle" fill="#fbbf24" fontSize="9" fontFamily="monospace">5日線</text>
+        </g>
+        <g style={{ animation: "fu 0.3s 2.8s both" }}>
+          <rect x="495" y="165" width="54" height="16" rx="3" fill="#0d0d1a" stroke="#60a5fa" strokeWidth="0.5" opacity="0.9"/>
+          <text x="522" y="177" textAnchor="middle" fill="#60a5fa" fontSize="9" fontFamily="monospace">25日線</text>
+        </g>
+
+        {/* スキャンライン */}
+        <rect x="-4" y="50" width="2" height="370" fill="url(#sg)" style={{ animation: "sc 6s 1s linear infinite" }}/>
+      </svg>
+
+      {/* グラデーションオーバーレイ */}
+      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right,#0a0a0f 26%,rgba(10,10,15,0.4) 52%,#0a0a0f 100%)", pointerEvents: "none", zIndex: 2 }}/>
+      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom,#0a0a0f 0%,transparent 10%,transparent 88%,#0a0a0f 100%)", pointerEvents: "none", zIndex: 2 }}/>
+
+      {/* Hero Content - タイトルは3秒以内にすべて表示 */}
+      <div style={{ position: "relative", zIndex: 3, padding: "72px 44px", maxWidth: 560 }}>
+        {/* バッジ: 0.3s */}
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(20,20,40,0.92)", border: "1px solid #3a2a6a", borderRadius: 20, padding: "5px 14px", marginBottom: 22, opacity: 0, animation: "ci 0.5s 0.3s ease-out forwards" }}>
+          <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#c4b5fd", animation: "dp 1.8s infinite" }}/>
+          <span style={{ fontSize: 10, color: "#9988cc", letterSpacing: "0.18em" }}>INDEPENDENT RESEARCH — 2026</span>
+        </div>
+
+        {/* タイトル: 0.7s */}
+        <h1 style={{ fontSize: 50, fontWeight: 800, lineHeight: 1.05, letterSpacing: "-0.03em", marginBottom: 18, color: "#f0f0ff", fontFamily: "'Hiragino Sans','Noto Sans JP',sans-serif", opacity: 0, animation: "ci 0.6s 0.7s ease-out forwards" }}>
+          見えない回路を、<br/>
+          <span style={{ background: "linear-gradient(90deg,#c4b5fd,#818cf8,#60a5fa)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+            読み解く知性。
+          </span>
+        </h1>
+
+        {/* サブタイトル: 1.2s */}
+        <p style={{ fontSize: 15, color: "#5a5a7a", lineHeight: 1.8, marginBottom: 32, fontFamily: "'Hiragino Sans','Noto Sans JP',sans-serif", opacity: 0, animation: "ci 0.5s 1.2s ease-out forwards" }}>
+          半導体・地政学・日本株——構造を読む独立系リサーチ。<br/>
+          プロが見落とす非対称な優位を、あなたの投資判断に。
+        </p>
+
+        {/* ボタン: 1.6s */}
+        <div style={{ display: "flex", gap: 12, opacity: 0, animation: "ci 0.5s 1.6s ease-out forwards" }}>
+          <button style={{ background: "#7c3aed", color: "#fff", border: "none", padding: "13px 26px", borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>最新レポートを読む</button>
+          <button style={{ background: "transparent", color: "#c4b5fd", border: "1px solid #3a2a6a", padding: "13px 26px", borderRadius: 7, fontSize: 14, cursor: "pointer", fontFamily: "'Hiragino Sans',sans-serif" }}>企業分析を見る</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Feature Cards & Insights ────────────────────────────
+const features = [
+  { color: "#7c3aed", bg: "#1a0a2e", title: "半導体バリューチェーン", body: "ファブレスからファウンドリ、装置・素材まで。世界の半導体産業を構造から分解する独自レポート。", tag: "Global · 150社" },
+  { color: "#0ea5e9", bg: "#0a1a2e", title: "マクロ・地政学分析", body: "米中対立・輸出規制・ドル体制の変容。市場構造に影響を与えるマクロ要因を深く読む。", tag: "Deep Analysis" },
+  { color: "#f59e0b", bg: "#1a140a", title: "日本株・個別企業分析", body: "TEL・アドバンテスト・ディスコ——現地フィールドワークと財務分析を組み合わせた日本株リサーチ。", tag: "Japan · 17社" },
+  { color: "#10b981", bg: "#0a1a14", title: "時価総額・業績トラッキング", body: "主要150社の時価総額・売上・成長率を一覧で比較。数字で語る企業の実力。", tag: "Interactive" },
+  { color: "#e04040", bg: "#1a0a0a", title: "競争優位（モート）分析", body: "なぜその企業が強いのか。特許・市場シェア・サプライチェーン支配力を本質から分析。", tag: "Moat" },
+  { color: "#8b5cf6", bg: "#120a1a", title: "企業間関係マッピング", body: "顧客・競合・製造委託——半導体エコシステムの相関図をインタラクティブに可視化。", tag: "Visual" },
+];
+
+const insights = [
+  { title: "「縁の下の力持ち」戦略", body: "日本はチップそのものより装置・材料で世界を支配。信越化学・SUMCO・ディスコはNVIDIAやTSMCなしに機能しない。", color: "#22c55e" },
+  { title: "Rapidusは中長期の賭け", body: "2027年2nm量産目標。出資企業（トヨタ・ソニー等）や装置供給企業（TEL・レーザーテック）が間接的な受益者。", color: "#60a5fa" },
+  { title: "AI需要の直撃銘柄", body: "アドバンテスト（HBMテスト首位）・ディスコ（後工程独占）・レーザーテック（EUVマスク唯一）はAIブームの恩恵が直接届く。", color: "#fbbf24" },
+  { title: "パワー半導体はEV次第", body: "ローム・富士電機のSiC/IGBTはEV普及速度に連動。地政学リスクは低く長期成長テーマ。", color: "#f97316" },
+];
+
+// ── Main App ────────────────────────────────────────────
+export default function App() {
+  const [tickerItems, setTickerItems] = useState([]);
+  const [speed, setSpeed] = useState(18);
+
+  return (
+    <div style={{ fontFamily: "'Hiragino Sans','Noto Sans JP',sans-serif", background: "#0a0a0f", color: "#e8e8f0", minHeight: "100vh" }}>
+
+      {/* Nav */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 40px", borderBottom: "1px solid #1e1e3a", background: "#0a0a0f" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <rect width="30" height="30" rx="6" fill="#0d0d1a"/>
+            <rect x="5" y="13" width="4" height="4" rx="0.5" fill="#4a2a8a"/>
+            <rect x="13" y="5" width="4" height="4" rx="0.5" fill="#4a2a8a"/>
+            <rect x="13" y="13" width="4" height="4" rx="0.5" fill="#c4b5fd"/>
+            <rect x="21" y="13" width="4" height="4" rx="0.5" fill="#4a2a8a"/>
+            <rect x="13" y="21" width="4" height="4" rx="0.5" fill="#4a2a8a"/>
+            <line x1="9" y1="15" x2="13" y2="15" stroke="#2a1a4a" strokeWidth="1"/>
+            <line x1="17" y1="15" x2="21" y2="15" stroke="#2a1a4a" strokeWidth="1"/>
+            <line x1="15" y1="9" x2="15" y2="13" stroke="#2a1a4a" strokeWidth="1"/>
+            <line x1="15" y1="17" x2="15" y2="21" stroke="#2a1a4a" strokeWidth="1"/>
+          </svg>
+          <div>
+            <div style={{ fontSize: 15, fontWeight: 800, letterSpacing: "0.06em", color: "#f0f0ff" }}>TraderCat</div>
+            <div style={{ fontSize: 9, letterSpacing: "0.25em", color: "#3a3a5a", textTransform: "uppercase" }}>Market Intelligence</div>
+          </div>
+        </div>
+        <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
+          {["半導体", "マクロ", "企業分析", "日本株"].map(l => (
+            <span key={l} style={{ fontSize: 12, color: "#4a4a6a", cursor: "pointer", letterSpacing: "0.05em" }}>{l}</span>
+          ))}
+          <button style={{ fontSize: 12, border: "1px solid #2a2a4a", background: "transparent", color: "#8888cc", padding: "7px 16px", borderRadius: 5, cursor: "pointer", letterSpacing: "0.05em", fontFamily: "inherit" }}>レポートを見る</button>
+        </div>
+      </div>
+
+      <TickerBar items={tickerItems} speed={speed} />
+      <ChartHero />
+
+      {/* Stats */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", borderTop: "1px solid #1e1e3a", borderBottom: "1px solid #1e1e3a" }}>
+        {[
+          { num: "150+", label: "GLOBAL COMPANIES COVERED" },
+          { num: "$793B", label: "SEMICONDUCTOR MARKET 2025" },
+          { num: "17", label: "JAPAN SEMICONDUCTOR FIRMS" },
+          { num: "週次", label: "RESEARCH UPDATE" },
+        ].map((s, i) => (
+          <div key={i} style={{ padding: "24px 0", textAlign: "center", borderRight: i < 3 ? "1px solid #1e1e3a" : "none" }}>
+            <div style={{ fontSize: 28, fontWeight: 800, color: "#c4b5fd", letterSpacing: "-0.02em" }}>{s.num}</div>
+            <div style={{ fontSize: 10, color: "#2a2a4a", letterSpacing: "0.1em", marginTop: 4 }}>{s.label}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Ticker Editor */}
+      <div style={{ padding: "28px 40px" }}>
+        <TickerEditor items={tickerItems} setItems={setTickerItems} speed={speed} setSpeed={setSpeed} />
+      </div>
+
+      {/* Features */}
+      <div style={{ padding: "24px 40px 56px" }}>
+        <div style={{ fontSize: 10, letterSpacing: "0.3em", color: "#3a3a5a", textTransform: "uppercase", marginBottom: 10 }}>What we cover</div>
+        <div style={{ fontSize: 26, fontWeight: 700, color: "#e8e8f0", marginBottom: 28, letterSpacing: "-0.02em" }}>
+          投資家が知るべき、<span style={{ color: "#7c3aed" }}>構造的な視点</span>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10 }}>
+          {features.map(f => (
+            <div key={f.title} style={{ background: "#0d0d1a", border: "1px solid #1e1e3a", borderRadius: 10, padding: "20px", position: "relative", overflow: "hidden" }}>
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: f.color }}/>
+              <div style={{ width: 32, height: 32, borderRadius: 6, background: f.bg, marginBottom: 12, border: `1px solid ${f.color}30` }}/>
+              <div style={{ fontSize: 13, fontWeight: 700, color: "#e8e8f0", marginBottom: 6 }}>{f.title}</div>
+              <div style={{ fontSize: 11, color: "#4a4a6a", lineHeight: 1.7, marginBottom: 10 }}>{f.body}</div>
+              <span style={{ fontSize: 10, color: f.color, background: f.color + "15", border: `1px solid ${f.color}30`, borderRadius: 4, padding: "2px 8px" }}>{f.tag}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Insights */}
+      <div style={{ padding: "24px 40px 56px", borderTop: "1px solid #1e1e3a" }}>
+        <div style={{ fontSize: 10, letterSpacing: "0.3em", color: "#3a3a5a", textTransform: "uppercase", marginBottom: 10 }}>Key Insight</div>
+        <div style={{ fontSize: 26, fontWeight: 700, color: "#e8e8f0", marginBottom: 28, letterSpacing: "-0.02em" }}>投資家向け視点</div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 10 }}>
+          {insights.map(ins => (
+            <div key={ins.title} style={{ background: "#0d0d1a", border: `1px solid ${ins.color}20`, borderRadius: 10, padding: "16px 18px" }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: ins.color, marginBottom: 6 }}>{ins.title}</div>
+              <div style={{ fontSize: 11, color: "#5a5a7a", lineHeight: 1.7 }}>{ins.body}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* CTA */}
+      <div style={{ padding: "64px 40px", textAlign: "center", borderTop: "1px solid #1e1e3a", position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 0%,rgba(124,58,237,0.05) 0%,transparent 60%)", pointerEvents: "none" }}/>
+        <div style={{ position: "relative", zIndex: 1 }}>
+          <div style={{ fontSize: 10, letterSpacing: "0.3em", color: "#3a3a5a", textTransform: "uppercase", marginBottom: 14 }}>For serious investors</div>
+          <div style={{ fontSize: 32, fontWeight: 800, color: "#e8e8f0", marginBottom: 10, letterSpacing: "-0.02em", lineHeight: 1.2 }}>プロが見落とす、<br/>構造的優位を掴め。</div>
+          <p style={{ fontSize: 14, color: "#4a4a6a", marginBottom: 28 }}>独立系リサーチャーによる、忖度なき企業分析。</p>
+          <div style={{ display: "flex", gap: 12, justifyContent: "center" }}>
+            <button style={{ background: "#7c3aed", color: "#fff", border: "none", padding: "13px 28px", borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>無料で読み始める</button>
+            <button style={{ background: "transparent", color: "#c4b5fd", border: "1px solid #2a2a4a", padding: "13px 28px", borderRadius: 7, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}>コンテンツ一覧</button>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div style={{ padding: "20px 40px", borderTop: "1px solid #1e1e3a", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <span style={{ fontSize: 11, color: "#1e1e3a", letterSpacing: "0.05em" }}>© 2026 TraderCat — Independent Market Intelligence</span>
+        <span style={{ fontSize: 11, color: "#1e1e3a" }}>tradercat.site</span>
+      </div>
+    </div>
+  );
+}
