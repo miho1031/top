@@ -264,9 +264,9 @@ function ChartHero() {
           只今制作中<br/>
           今しばらくお待ちください
         </p>
-        <div style={{ display: "flex", gap: 12, flexWrap: "wrap", opacity: 0, animation: "ci 0.5s 1.6s ease-out forwards" }}>
-          <button style={{ background: "#7c3aed", color: "#fff", border: "none", padding: "13px 26px", borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>最新レポートを読む</button>
-          <button style={{ background: "transparent", color: "#c4b5fd", border: "1px solid #3a2a6a", padding: "13px 26px", borderRadius: 7, fontSize: 14, cursor: "pointer", fontFamily: "'Hiragino Sans',sans-serif" }}>企業分析を見る</button>
+        <div style={{ display: "flex", gap: 12, flexWrap: "wrap", opacity: 0, animation: "ci 0.5s 1.6s ease-out forwards" }}>      
+          <a href="https://tradercat.site/report/show_market_list.php" style={{textDecoration:'none'}}><button style={{ background: "#7c3aed", color: "#fff", border: "none", padding: "13px 26px", borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>マーケットデータを見る</button></a>
+          <a href="https://tradercat.site/report/show_company_list.php" style={{textDecoration:'none'}}><button style={{ background: "transparent", color: "#c4b5fd", border: "1px solid #3a2a6a", padding: "13px 26px", borderRadius: 7, fontSize: 14, cursor: "pointer", fontFamily: "'Hiragino Sans',sans-serif" }}>企業分析を見る</button></a>
         </div>
       </div>
     </div>
@@ -355,6 +355,36 @@ export default function App() {
         <TickerEditor items={tickerItems} setItems={setTickerItems} speed={speed} setSpeed={setSpeed} />
       </div>
 
+{/* How to use */}
+<div className="section-pad" style={{ padding: "48px 40px", borderTop: "1px solid #1e1e3a" }}>
+  <div style={{ fontSize: 10, letterSpacing: "0.3em", color: "#8080aa", textTransform: "uppercase", marginBottom: 10 }}>How to use</div>
+  <div style={{ display: "flex", gap: 40, alignItems: "center", flexWrap: "wrap" }}>
+
+    {/* ビジュアル（後で画像に差し替え） */}
+    {/* ▼ ここに画像を入れる場合は下のdivを <img src="画像URL" style={{width:"100%",borderRadius:12}}/> に差し替えてください */}
+    <div style={{ flex: "0 0 340px", height: 220, borderRadius: 12, background: "linear-gradient(135deg,#0d0d1a,#1a0a2e)", border: "1px solid #2a1a4a", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden" }}>
+      <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle at 30% 50%,rgba(124,58,237,.2) 0%,transparent 60%),radial-gradient(circle at 80% 30%,rgba(59,130,246,.1) 0%,transparent 50%)" }}/>
+      <div style={{ position: "relative", textAlign: "center" }}>
+        <div style={{ fontSize: 48, marginBottom: 10 }}>📊</div>
+        <div style={{ fontSize: 11, color: "#c4b5fd", letterSpacing: "0.15em", fontWeight: 700 }}>MARKET DATA VISUALIZATION</div>
+      </div>
+    </div>
+
+    {/* テキスト */}
+    <div style={{ flex: 1, minWidth: 260 }}>
+      <div style={{ fontSize: "clamp(20px,4vw,26px)", fontWeight: 700, color: "#e8e8f0", marginBottom: 16, letterSpacing: "-0.02em", lineHeight: 1.3 }}>
+        トレーダーキャットの<span style={{ color: "#c4b5fd" }}>使い方</span>
+      </div>
+      <p style={{ fontSize: 13, color: "#9090bb", lineHeight: 2, marginBottom: 0 }}>
+        気になる銘柄を調べようとすると、情報は分散していて、まとめサイトは広告だらけ。比較したいのに、比較できるページがない。<br/><br/>
+        そんな日々のストレスから生まれたのがTraderCatです。<br/><br/>
+        トレードの判断材料になるデータを、すぐ開けて、すぐ使える形に。<span style={{ color: "#c4b5fd", fontWeight: 700 }}>投資家自身が作った、投資家のためのデータサイトです。</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+      
       {/* Features - スマホで1列 */}
       <div className="section-pad" style={{ padding: "24px 40px 56px" }}>
         <div style={{ fontSize: 10, letterSpacing: "0.3em", color: "#8080aa", textTransform: "uppercase", marginBottom: 10 }}>What we cover</div>
