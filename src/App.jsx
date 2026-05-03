@@ -17,11 +17,7 @@ function TickerBar({ items, speed }) {
     if (items.length > 0) t.style.animation = `tickScroll ${speed}s linear infinite`;
   }, [items, speed]);
 
-  if (items.length === 0) return (
-    </*　div style={{ background: "#06060e", borderBottom: "1px solid #1e1e3a", padding: "10px 24px", fontSize: 11, color: "#8888aa", letterSpacing: "0.05em" }}>
-      ↓ 下の編集エリアから銘柄を追加してください
-    </div　*/>
-  );
+  if (items.length === 0) return null;
 
   const Row = ({ arr }) => arr.map((x, i) => {
     const t = typeLabels[x.dir];
@@ -41,70 +37,6 @@ function TickerBar({ items, speed }) {
       <div ref={trackRef} style={{ display: "flex", whiteSpace: "nowrap", padding: "10px 0" }}>
         <Row arr={items} /><Row arr={items} />
       </div>
-    </div>
-  );
-}
-
-// ── Ticker Editor ───────────────────────────────────────
-function TickerEditor({ items, setItems, speed, setSpeed }) {
-  const [sym, setSym] = useState("");
-  const [val, setVal] = useState("");
-  const [chg, setChg] = useState("");
-  const [dir, setDir] = useState("up");
-  const [open, setOpen] = useState(false);
-
-  const add = () => {
-    if (!sym.trim()) return;
-    setItems([...items, { id: Date.now(), sym: sym.trim(), val: val.trim(), chg: chg.trim(), dir }]);
-    setSym(""); setVal(""); setChg("");
-  };
-
-  const inp = { background: "#060610", border: "1px solid #1e1e3a", borderRadius: 4, color: "#c8c8e0", padding: "6px 10px", fontSize: 12, fontFamily: "inherit", outline: "none", width: 120 };
-  const speeds = [{ label: "遅い", val: 30 }, { label: "普通", val: 18 }, { label: "速い", val: 10 }];
-
-  return (
-    <div style={{ background: "#0d0d1a", border: "1px solid #1e1e3a", borderRadius: 8, overflow: "hidden" }}>
-      <div onClick={() => setOpen(!open)} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 16px", cursor: "pointer", borderBottom: open ? "1px solid #1e1e3a" : "none" }}>
-        <span style={{ fontSize: 10, color: "#9090bb", letterSpacing: "0.2em", textTransform: "uppercase" }}>Ticker Editor — 銘柄を編集</span>
-        <span style={{ fontSize: 12, color: "#6060aa" }}>{open ? "▲" : "▼"}</span>
-      </div>
-      {open && (
-        <div style={{ padding: "14px 16px" }}>
-          <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center", marginBottom: 10 }}>
-            <input value={sym} onChange={e => setSym(e.target.value)} onKeyDown={e => e.key === "Enter" && add()} placeholder="銘柄名 (例: NVDA)" style={inp} />
-            <input value={val} onChange={e => setVal(e.target.value)} placeholder="株価 (例: $947)" style={inp} />
-            <input value={chg} onChange={e => setChg(e.target.value)} onKeyDown={e => e.key === "Enter" && add()} placeholder="騰落率 (例: 3.2)" style={{ ...inp, width: 90 }} />
-            <select value={dir} onChange={e => setDir(e.target.value)} style={{ ...inp, width: "auto", cursor: "pointer" }}>
-              <option value="up">▲ プラス</option>
-              <option value="dn">▼ マイナス</option>
-              <option value="nt">— 変わらず</option>
-            </select>
-            <button onClick={add} style={{ background: "#7c3aed", border: "none", color: "#fff", padding: "6px 14px", borderRadius: 4, fontSize: 11, cursor: "pointer", fontFamily: "inherit", fontWeight: 700 }}>追加 +</button>
-            <button onClick={() => setItems([])} style={{ background: "transparent", border: "1px solid #1e1e3a", color: "#8888aa", padding: "6px 12px", borderRadius: 4, fontSize: 11, cursor: "pointer", fontFamily: "inherit" }}>全消去</button>
-          </div>
-          {items.length > 0 && (
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 12 }}>
-              {items.map(x => {
-                const t = typeLabels[x.dir];
-                return (
-                  <span key={x.id} style={{ display: "inline-flex", alignItems: "center", gap: 5, background: "#111120", border: "1px solid #1e1e3a", borderRadius: 4, padding: "3px 10px", fontSize: 11 }}>
-                    <span style={{ color: "#a0a0c0", fontWeight: 700 }}>{x.sym}</span>
-                    {x.val && <span style={{ color: "#c8c8e0" }}>{x.val}</span>}
-                    {x.chg && <span style={{ color: t.cls }}>{t.sign}{x.chg}%</span>}
-                    <span onClick={() => setItems(items.filter(i => i.id !== x.id))} style={{ color: "#6060aa", cursor: "pointer", fontSize: 14, lineHeight: 1 }}>×</span>
-                  </span>
-                );
-              })}
-            </div>
-          )}
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <span style={{ fontSize: 10, color: "#8888aa", letterSpacing: "0.1em" }}>スクロール速度:</span>
-            {speeds.map(s => (
-              <button key={s.val} onClick={() => setSpeed(s.val)} style={{ background: "transparent", border: `1px solid ${speed === s.val ? "#7c3aed" : "#1e1e3a"}`, color: speed === s.val ? "#c4b5fd" : "#8888aa", padding: "3px 10px", borderRadius: 3, fontSize: 10, cursor: "pointer", fontFamily: "inherit" }}>{s.label}</button>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   );
 }
@@ -254,7 +186,7 @@ function ChartHero() {
           <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#c4b5fd", animation: "dp 1.8s infinite" }}/>
           <span style={{ fontSize: 10, color: "#b0a0dd", letterSpacing: "0.15em" }}>INDEPENDENT RESEARCH — 2026</span>
         </div>
-              <h1 style={{ fontSize: "clamp(32px,6vw,50px)", fontWeight: 800, lineHeight: 1.05, letterSpacing: "-0.03em", marginBottom: 16, color: "#f0f0ff", fontFamily: "'Hiragino Sans','Noto Sans JP',sans-serif", opacity: 0, animation: "ci 0.6s 0.7s ease-out forwards" }}>
+        <h1 style={{ fontSize: "clamp(32px,6vw,50px)", fontWeight: 800, lineHeight: 1.05, letterSpacing: "-0.03em", marginBottom: 16, color: "#f0f0ff", fontFamily: "'Hiragino Sans','Noto Sans JP',sans-serif", opacity: 0, animation: "ci 0.6s 0.7s ease-out forwards" }}>
           WIP トレードに役立つ知識サイト<br/>
           <span style={{ background: "linear-gradient(90deg,#c4b5fd,#818cf8,#60a5fa)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
             ただいま制作中！年内完成予定
@@ -264,9 +196,13 @@ function ChartHero() {
           只今制作中<br/>
           今しばらくお待ちください
         </p>
-        <div style={{ display: "flex", gap: 12, flexWrap: "wrap", opacity: 0, animation: "ci 0.5s 1.6s ease-out forwards" }}>      
-          <a href="https://tradercat.site/report/show_market_list.php" style={{textDecoration:'none'}}><button style={{ background: "#7c3aed", color: "#fff", border: "none", padding: "13px 26px", borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>マーケットデータを見る</button></a>
-          <a href="https://tradercat.site/report/show_company_list.php" style={{textDecoration:'none'}}><button style={{ background: "transparent", color: "#c4b5fd", border: "1px solid #3a2a6a", padding: "13px 26px", borderRadius: 7, fontSize: 14, cursor: "pointer", fontFamily: "'Hiragino Sans',sans-serif" }}>企業分析を見る</button></a>
+        <div style={{ display: "flex", gap: 12, flexWrap: "wrap", opacity: 0, animation: "ci 0.5s 1.6s ease-out forwards" }}>
+          <a href="https://tradercat.site/report/show_market_list.php" style={{textDecoration:'none'}}>
+            <button style={{ background: "#7c3aed", color: "#fff", border: "none", padding: "13px 26px", borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>マーケットデータを見る</button>
+          </a>
+          <a href="https://tradercat.site/report/show_company_list.php" style={{textDecoration:'none'}}>
+            <button style={{ background: "transparent", color: "#c4b5fd", border: "1px solid #3a2a6a", padding: "13px 26px", borderRadius: 7, fontSize: 14, cursor: "pointer", fontFamily: "'Hiragino Sans',sans-serif" }}>企業分析を見る</button>
+          </a>
         </div>
       </div>
     </div>
@@ -274,13 +210,11 @@ function ChartHero() {
 }
 
 const features = [
-  { color: "#7c3aed", bg: "#1a0a2e", title: "日本の半導体バリューチェーン", body: "ファブレスからファウンドリ、装置・素材まで、バリューチェーン構造を視覚的に俯瞰。<br></br>日本の半導体産業まとめ 企業名をタップで詳細展開", tag: "Global · 150社", url: "https://japansemicondu.netlify.app/" },
-  { color: "#0ea5e9", bg: "#0a1a2e", title: "世界の半導体バリューチェーン", body: "ファブレスからファウンドリ、装置・素材まで、バリューチェーン構造を視覚的に俯瞰。<br></br>世界の半導体産業まとめ　企業名をタップで詳細展開", tag: "Deep Analysis", url: "https://teal-melomakarona-306990.netlify.app/" },
+  { color: "#7c3aed", bg: "#1a0a2e", title: "日本の半導体バリューチェーン", body: "ファブレスからファウンドリ、装置・素材まで、バリューチェーン構造を視覚的に俯瞰。日本の半導体産業まとめ 企業名をタップで詳細展開", tag: "Japan · 17社", url: "https://japansemicondu.netlify.app/" },
+  { color: "#0ea5e9", bg: "#0a1a2e", title: "世界の半導体バリューチェーン", body: "ファブレスからファウンドリ、装置・素材まで、バリューチェーン構造を視覚的に俯瞰。世界の半導体産業まとめ　企業名をタップで詳細展開", tag: "Global · 150社", url: "https://teal-melomakarona-306990.netlify.app/" },
   { color: "#f59e0b", bg: "#1a140a", title: "日本株・信用残高一覧", body: "直近の信用残高のまとめ、複数銘柄を比較検討できる便利機能つき", tag: "Japan · 信用残", url: "https://tradercat.site/report/show_margin.php" },
-  // { color: "#10b981", bg: "#0a1a14", title: "時価総額・業績トラッキング", body: "主要150社の時価総額・売上・成長率を一覧で比較。数字で語る企業の実力。", tag: "Interactive" },
-  // { color: "#e04040", bg: "#1a0a0a", title: "競争優位（モート）分析", body: "なぜその企業が強いのか。特許・市場シェア・サプライチェーン支配力を本質から分析。", tag: "Moat" },
-  // { color: "#8b5cf6", bg: "#120a1a", title: "企業間関係マッピング", body: "顧客・競合・製造委託——半導体エコシステムの相関図をインタラクティブに可視化。", tag: "Visual" },
 ];
+
 const insights = [
   { title: "「縁の下の力持ち」戦略", body: "日本はチップそのものより装置・材料で世界を支配。信越化学・SUMCO・ディスコはNVIDIAやTSMCなしに機能しない。", color: "#22c55e" },
   { title: "Rapidusは中長期の賭け", body: "2027年2nm量産目標。出資企業（トヨタ・ソニー等）や装置供給企業（TEL・レーザーテック）が間接的な受益者。", color: "#60a5fa" },
@@ -289,9 +223,6 @@ const insights = [
 ];
 
 export default function App() {
-  const [tickerItems, setTickerItems] = useState([]);
-  const [speed, setSpeed] = useState(18);
-
   return (
     <div style={{ fontFamily: "'Hiragino Sans','Noto Sans JP',sans-serif", background: "#0a0a0f", color: "#e8e8f0", minHeight: "100vh", margin: 0, padding: 0 }}>
       <style>{`
@@ -303,11 +234,10 @@ export default function App() {
           .insight-grid { grid-template-columns: 1fr !important; }
           .nav-pad { padding: 14px 10px !important; }
           .section-pad { padding: 24px 10px 40px !important; }
-          .ticker-pad { padding: 28px 10px !important; }
         }
       `}</style>
 
-      {/* Nav - シンプル版 */}
+      {/* Nav */}
       <div className="nav-pad" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 10px", borderBottom: "1px solid #1e1e3a", background: "#0a0a0f" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
@@ -327,87 +257,84 @@ export default function App() {
             <div style={{ fontSize: 9, letterSpacing: "0.25em", color: "#6060aa", textTransform: "uppercase" }}>Market Intelligence</div>
           </div>
         </div>
-        <button style={{ fontSize: 12, border: "1px solid #2a2a4a", background: "transparent", color: "#a0a0cc", padding: "7px 16px", borderRadius: 5, cursor: "pointer", letterSpacing: "0.05em", fontFamily: "inherit" }}>
-          レポートを見る
-        </button>
+        <a href="https://tradercat.site/report/show_market_list.php" style={{textDecoration:'none'}}>
+          <button style={{ fontSize: 12, border: "1px solid #2a2a4a", background: "transparent", color: "#a0a0cc", padding: "7px 16px", borderRadius: 5, cursor: "pointer", letterSpacing: "0.05em", fontFamily: "inherit" }}>
+            レポートを見る
+          </button>
+        </a>
       </div>
 
-      {/* <TickerBar items={tickerItems} speed={speed} /> */}
       <ChartHero />
 
-      {/* Stats - スマホで2列 */}
+      {/* Stats */}
       <div className="stats-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", borderTop: "1px solid #1e1e3a", borderBottom: "1px solid #1e1e3a" }}>
         {[
-{ num: "3,914", label: "日本の上場会社数" },
-{ num: "5,650", label: "米国の上場会社数" },
-{ num: "$4.1T", label: "日本のGDP" },
-{ num: "$29.2T", label: "米国のGDP" },
+          { num: "3,914", label: "日本の上場会社数", sub: "JAPAN LISTED" },
+          { num: "5,650", label: "米国の上場会社数", sub: "US LISTED" },
+          { num: "663兆円", label: "日本のGDP（名目）", sub: "JAPAN GDP 2025" },
+          { num: "$29.2T", label: "米国のGDP", sub: "US GDP 2025" },
         ].map((s, i) => (
           <div key={i} style={{ padding: "22px 0", textAlign: "center", borderRight: i < 3 ? "1px solid #1e1e3a" : "none" }}>
             <div style={{ fontSize: "clamp(20px,4vw,28px)", fontWeight: 800, color: "#c4b5fd", letterSpacing: "-0.02em" }}>{s.num}</div>
-            <div style={{ fontSize: "clamp(8px,1.5vw,10px)", color: "#7070aa", letterSpacing: "0.08em", marginTop: 4 }}>{s.label}</div>
+            <div style={{ fontSize: "clamp(9px,1.8vw,12px)", color: "#e8e8f0", marginTop: 4 }}>{s.label}</div>
+            <div style={{ fontSize: "clamp(7px,1.2vw,9px)", color: "#7070aa", letterSpacing: "0.08em", marginTop: 2 }}>{s.sub}</div>
           </div>
         ))}
       </div>
 
-      {/* Ticker Editor
-      <div className="ticker-pad" style={{ padding: "28px 40px" }}>
-        <TickerEditor items={tickerItems} setItems={setTickerItems} speed={speed} setSpeed={setSpeed} />
+      {/* How to use */}
+      <div className="section-pad" style={{ padding: "48px 40px", borderTop: "1px solid #1e1e3a" }}>
+        <div style={{ fontSize: 10, letterSpacing: "0.3em", color: "#8080aa", textTransform: "uppercase", marginBottom: 10 }}>How to use</div>
+        <div style={{ display: "flex", gap: 40, alignItems: "center", flexWrap: "wrap" }}>
+
+          {/* ビジュアル（後で画像に差し替え） */}
+          {/* ▼ ここに画像を入れる場合は下のdivを
+              <img src="画像のURL" style={{width:"100%", borderRadius:12, display:"block"}} alt="TraderCatの使い方"/>
+              に差し替えてください */}
+          <div style={{ flex: "0 0 340px", height: 220, borderRadius: 12, background: "linear-gradient(135deg,#0d0d1a,#1a0a2e)", border: "1px solid #2a1a4a", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden" }}>
+            <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle at 30% 50%,rgba(124,58,237,.2) 0%,transparent 60%),radial-gradient(circle at 80% 30%,rgba(59,130,246,.1) 0%,transparent 50%)" }}/>
+            <div style={{ position: "relative", textAlign: "center" }}>
+              <div style={{ fontSize: 48, marginBottom: 10 }}>📊</div>
+              <div style={{ fontSize: 11, color: "#c4b5fd", letterSpacing: "0.15em", fontWeight: 700 }}>MARKET DATA VISUALIZATION</div>
+            </div>
+          </div>
+
+          {/* テキスト */}
+          <div style={{ flex: 1, minWidth: 260 }}>
+            <div style={{ fontSize: "clamp(20px,4vw,26px)", fontWeight: 700, color: "#e8e8f0", marginBottom: 16, letterSpacing: "-0.02em", lineHeight: 1.3 }}>
+              トレーダーキャットの<span style={{ color: "#c4b5fd" }}>使い方</span>
+            </div>
+            <p style={{ fontSize: 13, color: "#9090bb", lineHeight: 2, marginBottom: 0 }}>
+              気になる銘柄を調べようとすると、情報は分散していて、まとめサイトは広告だらけ。比較したいのに、比較できるページがない。<br/><br/>
+              そんな日々のストレスから生まれたのがTraderCatです。<br/><br/>
+              トレードの判断材料になるデータを、すぐ開けて、すぐ使える形に。<span style={{ color: "#c4b5fd", fontWeight: 700 }}>投資家自身が作った、投資家のためのデータサイトです。</span>
+            </p>
+          </div>
+        </div>
       </div>
-       */}
 
-{/* How to use */}
-<div className="section-pad" style={{ padding: "48px 40px", borderTop: "1px solid #1e1e3a" }}>
-  <div style={{ fontSize: 10, letterSpacing: "0.3em", color: "#8080aa", textTransform: "uppercase", marginBottom: 10 }}>How to use</div>
-  <div style={{ display: "flex", gap: 40, alignItems: "center", flexWrap: "wrap" }}>
-
-    {/* ビジュアル（後で画像に差し替え） */}
-    {/* ▼ ここに画像を入れる場合は下のdivを <img src="画像URL" style={{width:"100%",borderRadius:12}}/> に差し替えてください */}
-    <div style={{ flex: "0 0 340px", height: 220, borderRadius: 12, background: "linear-gradient(135deg,#0d0d1a,#1a0a2e)", border: "1px solid #2a1a4a", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden" }}>
-      <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle at 30% 50%,rgba(124,58,237,.2) 0%,transparent 60%),radial-gradient(circle at 80% 30%,rgba(59,130,246,.1) 0%,transparent 50%)" }}/>
-      <div style={{ position: "relative", textAlign: "center" }}>
-        <div style={{ fontSize: 48, marginBottom: 10 }}>📊</div>
-        <div style={{ fontSize: 11, color: "#c4b5fd", letterSpacing: "0.15em", fontWeight: 700 }}>MARKET DATA VISUALIZATION</div>
-      </div>
-    </div>
-
-    {/* テキスト */}
-    <div style={{ flex: 1, minWidth: 260 }}>
-      <div style={{ fontSize: "clamp(20px,4vw,26px)", fontWeight: 700, color: "#e8e8f0", marginBottom: 16, letterSpacing: "-0.02em", lineHeight: 1.3 }}>
-        トレーダーキャットの<span style={{ color: "#c4b5fd" }}>使い方</span>
-      </div>
-      <p style={{ fontSize: 13, color: "#9090bb", lineHeight: 2, marginBottom: 0 }}>
-        気になる銘柄を調べようとすると、情報は分散していて、まとめサイトは広告だらけ。比較したいのに、比較できるページがない。<br/><br/>
-        そんな日々のストレスから生まれたのがTraderCatです。<br/><br/>
-        トレードの判断材料になるデータを、すぐ開けて、すぐ使える形に。<span style={{ color: "#c4b5fd", fontWeight: 700 }}>投資家自身が作った、投資家のためのデータサイトです。</span>
-      </p>
-    </div>
-  </div>
-</div>
-
-      
-      {/* Features - スマホで1列 */}
+      {/* Features */}
       <div className="section-pad" style={{ padding: "24px 40px 56px" }}>
         <div style={{ fontSize: 10, letterSpacing: "0.3em", color: "#8080aa", textTransform: "uppercase", marginBottom: 10 }}>What we cover</div>
         <div style={{ fontSize: "clamp(20px,4vw,26px)", fontWeight: 700, color: "#e8e8f0", marginBottom: 28, letterSpacing: "-0.02em" }}>
           トレーダー視点で設計した<span style={{ color: "#64baff" }}>経済データの可視化ツール</span>
         </div>
-<div className="feature-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10 }}>
-  {features.map(f => (
-    <a key={f.title} href={f.url} target="_blank" style={{textDecoration:'none',color:'inherit'}}>
-      <div style={{ background: "#0d0d1a", border: "1px solid #1e1e3a", borderRadius: 10, padding: "20px", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: f.color }}/>
-        <div style={{ width: 32, height: 32, borderRadius: 6, background: f.bg, marginBottom: 12, border: `1px solid ${f.color}30` }}/>
-        <div style={{ fontSize: 13, fontWeight: 700, color: "#e8e8f0", marginBottom: 6 }}>{f.title}</div>
-        <div style={{ fontSize: 11, color: "#9090bb", lineHeight: 1.7, marginBottom: 10 }}>{f.body}</div>
-        <span style={{ fontSize: 10, color: f.color, background: f.color + "15", border: `1px solid ${f.color}30`, borderRadius: 4, padding: "2px 8px" }}>{f.tag}</span>
-      </div>
-    </a>
-  ))}
-</div>
+        <div className="feature-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10 }}>
+          {features.map(f => (
+            <a key={f.title} href={f.url} target="_blank" style={{textDecoration:'none',color:'inherit'}}>
+              <div style={{ background: "#0d0d1a", border: "1px solid #1e1e3a", borderRadius: 10, padding: "20px", position: "relative", overflow: "hidden" }}>
+                <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: f.color }}/>
+                <div style={{ width: 32, height: 32, borderRadius: 6, background: f.bg, marginBottom: 12, border: `1px solid ${f.color}30` }}/>
+                <div style={{ fontSize: 13, fontWeight: 700, color: "#e8e8f0", marginBottom: 6 }}>{f.title}</div>
+                <div style={{ fontSize: 11, color: "#9090bb", lineHeight: 1.7, marginBottom: 10 }}>{f.body}</div>
+                <span style={{ fontSize: 10, color: f.color, background: f.color + "15", border: `1px solid ${f.color}30`, borderRadius: 4, padding: "2px 8px" }}>{f.tag}</span>
+              </div>
+            </a>
+          ))}
+        </div>
       </div>
 
-      {/* Insights - スマホで1列 */}
+      {/* Insights */}
       <div className="section-pad" style={{ padding: "24px 40px 56px", borderTop: "1px solid #1e1e3a" }}>
         <div style={{ fontSize: 10, letterSpacing: "0.3em", color: "#8080aa", textTransform: "uppercase", marginBottom: 10 }}>Key Insight</div>
         <div style={{ fontSize: "clamp(20px,4vw,26px)", fontWeight: 700, color: "#e8e8f0", marginBottom: 28, letterSpacing: "-0.02em" }}>投資家向け視点</div>
@@ -429,8 +356,12 @@ export default function App() {
           <div style={{ fontSize: "clamp(22px,4vw,32px)", fontWeight: 800, color: "#e8e8f0", marginBottom: 10, letterSpacing: "-0.02em", lineHeight: 1.2 }}>プロが見落とす、<br/>構造的優位を掴め。</div>
           <p style={{ fontSize: 14, color: "#9090bb", marginBottom: 28 }}>独立系リサーチャーによる、忖度なき企業分析。</p>
           <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-            <button style={{ background: "#7c3aed", color: "#fff", border: "none", padding: "13px 28px", borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>無料で読み始める</button>
-            <button style={{ background: "transparent", color: "#c4b5fd", border: "1px solid #2a2a4a", padding: "13px 28px", borderRadius: 7, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}>コンテンツ一覧</button>
+            <a href="https://tradercat.site/report/show_market_list.php" style={{textDecoration:'none'}}>
+              <button style={{ background: "#7c3aed", color: "#fff", border: "none", padding: "13px 28px", borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>マーケットデータを見る</button>
+            </a>
+            <a href="https://tradercat.site/report/show_company_list.php" style={{textDecoration:'none'}}>
+              <button style={{ background: "transparent", color: "#c4b5fd", border: "1px solid #2a2a4a", padding: "13px 28px", borderRadius: 7, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}>企業分析を見る</button>
+            </a>
           </div>
         </div>
       </div>
