@@ -274,8 +274,8 @@ function ChartHero() {
 }
 
 const features = [
-  { color: "#7c3aed", bg: "#1a0a2e", title: "日本の半導体バリューチェーン", body: "ファブレスからファウンドリ、装置・素材まで。日本の半導体産業まとめ", tag: "Global · 150社", url: "https://japansemicondu.netlify.app/" },
-  { color: "#0ea5e9", bg: "#0a1a2e", title: "世界の半導体バリューチェーン", body: "ファブレスからファウンドリ、装置・素材まで。世界の半導体産業まとめ", tag: "Deep Analysis", url: "https://teal-melomakarona-306990.netlify.app/" },
+  { color: "#7c3aed", bg: "#1a0a2e", title: "日本の半導体バリューチェーン", body: "ファブレスからファウンドリ、装置・素材まで、バリューチェーン構造を視覚的に俯瞰。<br></br>日本の半導体産業まとめ 企業名をタップで詳細展開", tag: "Global · 150社", url: "https://japansemicondu.netlify.app/" },
+  { color: "#0ea5e9", bg: "#0a1a2e", title: "世界の半導体バリューチェーン", body: "ファブレスからファウンドリ、装置・素材まで、バリューチェーン構造を視覚的に俯瞰。<br></br>世界の半導体産業まとめ　企業名をタップで詳細展開", tag: "Deep Analysis", url: "https://teal-melomakarona-306990.netlify.app/" },
   { color: "#f59e0b", bg: "#1a140a", title: "日本株・信用残高一覧", body: "直近の信用残高のまとめ、複数銘柄を比較検討できる便利機能つき", tag: "Japan · 信用残", url: "https://tradercat.site/report/show_margin.php" },
   // { color: "#10b981", bg: "#0a1a14", title: "時価総額・業績トラッキング", body: "主要150社の時価総額・売上・成長率を一覧で比較。数字で語る企業の実力。", tag: "Interactive" },
   // { color: "#e04040", bg: "#1a0a0a", title: "競争優位（モート）分析", body: "なぜその企業が強いのか。特許・市場シェア・サプライチェーン支配力を本質から分析。", tag: "Moat" },
@@ -359,7 +359,7 @@ export default function App() {
       <div className="section-pad" style={{ padding: "24px 40px 56px" }}>
         <div style={{ fontSize: 10, letterSpacing: "0.3em", color: "#8080aa", textTransform: "uppercase", marginBottom: 10 }}>What we cover</div>
         <div style={{ fontSize: "clamp(20px,4vw,26px)", fontWeight: 700, color: "#e8e8f0", marginBottom: 28, letterSpacing: "-0.02em" }}>
-          経済データを見やすく、<span style={{ color: "#7c3aed" }}>ユニークな視点で見えるものがある</span>
+          トレーダー視点で設計した<span style={{ color: "#64baff" }}>経済データの可視化ツール</span>
         </div>
 <div className="feature-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10 }}>
   {features.map(f => (
