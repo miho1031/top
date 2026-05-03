@@ -18,9 +18,9 @@ function TickerBar({ items, speed }) {
   }, [items, speed]);
 
   if (items.length === 0) return (
-    <div style={{ background: "#06060e", borderBottom: "1px solid #1e1e3a", padding: "10px 24px", fontSize: 11, color: "#8888aa", letterSpacing: "0.05em" }}>
+    </*　div style={{ background: "#06060e", borderBottom: "1px solid #1e1e3a", padding: "10px 24px", fontSize: 11, color: "#8888aa", letterSpacing: "0.05em" }}>
       ↓ 下の編集エリアから銘柄を追加してください
-    </div>
+    </div　*/>
   );
 
   const Row = ({ arr }) => arr.map((x, i) => {
@@ -332,16 +332,16 @@ export default function App() {
         </button>
       </div>
 
-      <TickerBar items={tickerItems} speed={speed} />
+      {/* <TickerBar items={tickerItems} speed={speed} /> */}
       <ChartHero />
 
       {/* Stats - スマホで2列 */}
       <div className="stats-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", borderTop: "1px solid #1e1e3a", borderBottom: "1px solid #1e1e3a" }}>
         {[
-          { num: "150+", label: "COMPANIES COVERED" },
-          { num: "$793B", label: "MARKET 2025" },
-          { num: "17", label: "JAPAN SEMI FIRMS" },
-          { num: "週次", label: "RESEARCH UPDATE" },
+{ num: "3,914", label: "日本の上場会社数" },
+{ num: "5,650", label: "米国の上場会社数" },
+{ num: "$4.1T", label: "日本のGDP" },
+{ num: "$29.2T", label: "米国のGDP" },
         ].map((s, i) => (
           <div key={i} style={{ padding: "22px 0", textAlign: "center", borderRight: i < 3 ? "1px solid #1e1e3a" : "none" }}>
             <div style={{ fontSize: "clamp(20px,4vw,28px)", fontWeight: 800, color: "#c4b5fd", letterSpacing: "-0.02em" }}>{s.num}</div>
@@ -350,10 +350,11 @@ export default function App() {
         ))}
       </div>
 
-      {/* Ticker Editor */}
+      {/* Ticker Editor
       <div className="ticker-pad" style={{ padding: "28px 40px" }}>
         <TickerEditor items={tickerItems} setItems={setTickerItems} speed={speed} setSpeed={setSpeed} />
       </div>
+       */}
 
 {/* How to use */}
 <div className="section-pad" style={{ padding: "48px 40px", borderTop: "1px solid #1e1e3a" }}>
