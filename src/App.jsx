@@ -308,7 +308,7 @@ export default function App() {
       `}</style>
 
       {/* Nav - シンプル版 */}
-      <div className="nav-pad" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 40px", borderBottom: "1px solid #1e1e3a", background: "#0a0a0f" }}>
+      <div className="nav-pad" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 10px", borderBottom: "1px solid #1e1e3a", background: "#0a0a0f" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
             <rect width="30" height="30" rx="6" fill="#0d0d1a"/>
