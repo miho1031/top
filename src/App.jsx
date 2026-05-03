@@ -274,14 +274,13 @@ function ChartHero() {
 }
 
 const features = [
-  { color: "#7c3aed", bg: "#1a0a2e", title: "日本の半導体バリューチェーン", body: "ファブレスからファウンドリ、装置・素材まで。日本の半導体産業まとめ", tag: "Global · 150社",　url:"https://japansemicondu.netlify.app/"　},
-  { color: "#0ea5e9", bg: "#0a1a2e", title: "世界の半導体バリューチェーン", body: "ファブレスからファウンドリ、装置・素材まで。世界の半導体産業まとめ", tag: "Deep Analysis", url:"https://teal-melomakarona-306990.netlify.app/" },
-  { color: "#f59e0b", bg: "#1a140a", title: "日本株・信用残高一覧", body: "直近の信用残高のまとめ、複数銘柄を比較検討できる便利機能つき", tag: "Japan · 17社", url:"https://tradercat.site/report/show_margin.php"},
-  { color: "#10b981", bg: "#0a1a14", title: "時価総額・業績トラッキング", body: "主要150社の時価総額・売上・成長率を一覧で比較。数字で語る企業の実力。", tag: "Interactive" },
-  { color: "#e04040", bg: "#1a0a0a", title: "競争優位（モート）分析", body: "なぜその企業が強いのか。特許・市場シェア・サプライチェーン支配力を本質から分析。", tag: "Moat" },
-  { color: "#8b5cf6", bg: "#120a1a", title: "企業間関係マッピング", body: "顧客・競合・製造委託——半導体エコシステムの相関図をインタラクティブに可視化。", tag: "Visual" },
+  { color: "#7c3aed", bg: "#1a0a2e", title: "日本の半導体バリューチェーン", body: "ファブレスからファウンドリ、装置・素材まで。日本の半導体産業まとめ", tag: "Global · 150社", url: "https://japansemicondu.netlify.app/" },
+  { color: "#0ea5e9", bg: "#0a1a2e", title: "世界の半導体バリューチェーン", body: "ファブレスからファウンドリ、装置・素材まで。世界の半導体産業まとめ", tag: "Deep Analysis", url: "https://teal-melomakarona-306990.netlify.app/" },
+  { color: "#f59e0b", bg: "#1a140a", title: "日本株・信用残高一覧", body: "直近の信用残高のまとめ、複数銘柄を比較検討できる便利機能つき", tag: "Japan · 信用残", url: "https://tradercat.site/report/show_margin.php" },
+  // { color: "#10b981", bg: "#0a1a14", title: "時価総額・業績トラッキング", body: "主要150社の時価総額・売上・成長率を一覧で比較。数字で語る企業の実力。", tag: "Interactive" },
+  // { color: "#e04040", bg: "#1a0a0a", title: "競争優位（モート）分析", body: "なぜその企業が強いのか。特許・市場シェア・サプライチェーン支配力を本質から分析。", tag: "Moat" },
+  // { color: "#8b5cf6", bg: "#120a1a", title: "企業間関係マッピング", body: "顧客・競合・製造委託——半導体エコシステムの相関図をインタラクティブに可視化。", tag: "Visual" },
 ];
-
 const insights = [
   { title: "「縁の下の力持ち」戦略", body: "日本はチップそのものより装置・材料で世界を支配。信越化学・SUMCO・ディスコはNVIDIAやTSMCなしに機能しない。", color: "#22c55e" },
   { title: "Rapidusは中長期の賭け", body: "2027年2nm量産目標。出資企業（トヨタ・ソニー等）や装置供給企業（TEL・レーザーテック）が間接的な受益者。", color: "#60a5fa" },
@@ -360,19 +359,21 @@ export default function App() {
       <div className="section-pad" style={{ padding: "24px 40px 56px" }}>
         <div style={{ fontSize: 10, letterSpacing: "0.3em", color: "#8080aa", textTransform: "uppercase", marginBottom: 10 }}>What we cover</div>
         <div style={{ fontSize: "clamp(20px,4vw,26px)", fontWeight: 700, color: "#e8e8f0", marginBottom: 28, letterSpacing: "-0.02em" }}>
-          主婦ならではの、<span style={{ color: "#7c3aed" }}>ユニークな視点</span>
+          経済データを見やすく、<span style={{ color: "#7c3aed" }}>ユニークな視点で見えるものがある</span>
         </div>
-        <div className="feature-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10 }}>
-          {features.map(f => (
-            <div key={f.title} style={{ background: "#0d0d1a", border: "1px solid #1e1e3a", borderRadius: 10, padding: "20px", position: "relative", overflow: "hidden" }}>
-              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: f.color }}/>
-              <div style={{ width: 32, height: 32, borderRadius: 6, background: f.bg, marginBottom: 12, border: `1px solid ${f.color}30` }}/>
-              <div style={{ fontSize: 13, fontWeight: 700, color: "#e8e8f0", marginBottom: 6 }}>{f.title}</div>
-              <div style={{ fontSize: 11, color: "#9090bb", lineHeight: 1.7, marginBottom: 10 }}>{f.body}</div>
-              <span style={{ fontSize: 10, color: f.color, background: f.color + "15", border: `1px solid ${f.color}30`, borderRadius: 4, padding: "2px 8px" }}>{f.tag}</span>
-            </div>
-          ))}
-        </div>
+<div className="feature-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10 }}>
+  {features.map(f => (
+    <a key={f.title} href={f.url} target="_blank" style={{textDecoration:'none',color:'inherit'}}>
+      <div style={{ background: "#0d0d1a", border: "1px solid #1e1e3a", borderRadius: 10, padding: "20px", position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: f.color }}/>
+        <div style={{ width: 32, height: 32, borderRadius: 6, background: f.bg, marginBottom: 12, border: `1px solid ${f.color}30` }}/>
+        <div style={{ fontSize: 13, fontWeight: 700, color: "#e8e8f0", marginBottom: 6 }}>{f.title}</div>
+        <div style={{ fontSize: 11, color: "#9090bb", lineHeight: 1.7, marginBottom: 10 }}>{f.body}</div>
+        <span style={{ fontSize: 10, color: f.color, background: f.color + "15", border: `1px solid ${f.color}30`, borderRadius: 4, padding: "2px 8px" }}>{f.tag}</span>
+      </div>
+    </a>
+  ))}
+</div>
       </div>
 
       {/* Insights - スマホで1列 */}
