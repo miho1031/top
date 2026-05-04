@@ -96,7 +96,7 @@ function ChartHero() {
   ];
 
   return (
-    <div style={{ position: "relative", : "100%", minHeight: 480, overflow: "hidden", background: "#0a0a0f", display: "flex", alignItems: "center" }}>
+    <div style={{ position: "relative", width: "100%", minHeight: 480, overflow: "hidden", background: "#0a0a0f", display: "flex", alignItems: "center" }}>
       <style>{`
         @keyframes ci{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
         @keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
