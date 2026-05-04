@@ -336,10 +336,10 @@ export default function App() {
         {/* ボタン */}
  　　 <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", marginTop: 32 }}>
    　 <a href="https://tradercat.site/report/show_market_list.php" style={{textDecoration:'none'}}>
-      <button style={{ background: "#7c3aed", color: "#fff", border: "none", padding: "13px 28px", borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" width: 300 }}>マーケットデータを見る</button>
+      <button style={{ background: "#7c3aed", color: "#fff", border: "none", padding: "13px 28px", borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit",  width: 300 }}>マーケットデータを見る</button>
   　  </a>
     　<a href="https://tradercat.site/report/show_company_list.php" style={{textDecoration:'none'}}>
-      <button style={{ background: "transparent", color: "#c4b5fd", border: "1px solid #2a2a4a", padding: "13px 28px", borderRadius: 7, fontSize: 14, cursor: "pointer", fontFamily: "inherit" width: 300p }}>企業分析を見る</button>
+      <button style={{ background: "transparent", color: "#c4b5fd", border: "1px solid #2a2a4a", padding: "13px 28px", borderRadius: 7, fontSize: 14, cursor: "pointer", fontFamily: "inherit" , width: 300 }}>企業分析を見る</button>
   　  </a>
   　</div>
 </div>
