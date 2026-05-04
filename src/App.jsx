@@ -135,8 +135,8 @@ function ChartHero() {
           points="310,385 340,375 370,362 400,348 430,330 460,310 490,285 520,262 550,245 580,238 610,245 640,258 670,270 700,282 730,292 760,298 790,302 820,304 850,306"/>
         {candles.map(([cx, wt, wb, bt, bh, color, delay], i) => (
           <g key={i} style={{ animation: `fu 0.2s ${delay}s both` }} filter={i===12||i===13?"url(#gl2)":undefined}>
-            <line x1={cx} y1={wt} x2={cx} y2={wb} stroke={color} stroke={i>=12&&i<=14?"1.5":"1.2"}/>
-            <rect x={Number(cx)-6} y={bt} ={i>=12&&i<=14?16:12} height={bh} fill={color} rx="0.5" opacity="0.9"/>
+            <line x1={cx} y1={wt} x2={cx} y2={wb} stroke={color} strokewidth={i>=12&&i<=14?"1.5":"1.2"}/>
+            <rect x={Number(cx)-6} y={bt} width={i>=12&&i<=14?16:12} height={bh} fill={color} rx="0.5" opacity="0.9"/>
           </g>
         ))}
         <g style={{ animation: "fu 0.3s 2.02s both" }} filter="url(#gl)">
