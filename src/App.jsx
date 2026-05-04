@@ -96,7 +96,7 @@ function ChartHero() {
   ];
 
   return (
-    <div style={{ position: "relative", width: "100%", minHeight: 480, overflow: "hidden", background: "#0a0a0f", display: "flex", alignItems: "center" }}>
+    <div style={{ position: "relative", : "100%", minHeight: 480, overflow: "hidden", background: "#0a0a0f", display: "flex", alignItems: "center" }}>
       <style>{`
         @keyframes ci{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
         @keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
@@ -107,7 +107,7 @@ function ChartHero() {
         @keyframes dp{0%,100%{opacity:1}50%{opacity:0.25}}
       `}</style>
 
-      <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }} viewBox="0 0 900 520" preserveAspectRatio="xMidYMid slice">
+      <svg style={{ position: "absolute", inset: 0, : "100%", height: "100%" }} viewBox="0 0 900 520" preserveAspectRatio="xMidYMid slice">
         <defs>
           <linearGradient id="sg" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="transparent"/>
@@ -119,30 +119,30 @@ function ChartHero() {
           <filter id="gl2"><feGaussianBlur stdDeviation="1.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
         </defs>
         <g opacity="0.12">
-          {[75,155,235,315,395].map(y => <line key={y} x1="0" y1={y} x2="900" y2={y} stroke="#8080bb" strokeWidth="0.5"/>)}
-          {[200,380,560,740].map(x => <line key={x} x1={x} y1="50" x2={x} y2="420" stroke="#8080bb" strokeWidth="0.5"/>)}
+          {[75,155,235,315,395].map(y => <line key={y} x1="0" y1={y} x2="900" y2={y} stroke="#8080bb" stroke="0.5"/>)}
+          {[200,380,560,740].map(x => <line key={x} x1={x} y1="50" x2={x} y2="420" stroke="#8080bb" stroke="0.5"/>)}
         </g>
         {[["5000","79"],["3800","159"],["2600","239"],["1400","319"]].map(([v,y]) => (
           <text key={v} x="856" y={y} fill="#555580" fontSize="10" fontFamily="monospace">{v}</text>
         ))}
-        <polyline fill="none" stroke="#fbbf24" strokeWidth="2" strokeLinejoin="round" opacity="0.85"
+        <polyline fill="none" stroke="#fbbf24" stroke="2" strokeLinejoin="round" opacity="0.85"
           strokeDasharray="1600" strokeDashoffset="1600"
           style={{ animation: "ml 2.5s 0.2s ease-out forwards" }}
           points="310,365 326,358 342,352 358,340 374,330 390,344 406,320 422,308 438,295 454,318 470,285 486,260 502,220 520,168 538,130 556,175 574,225 592,205 610,240 628,270 646,248 664,280 682,258 700,285 718,262 736,278 754,255 772,268 790,252 808,265 826,248"/>
-        <polyline fill="none" stroke="#60a5fa" strokeWidth="1.5" strokeLinejoin="round" opacity="0.6"
+        <polyline fill="none" stroke="#60a5fa" stroke="1.5" strokeLinejoin="round" opacity="0.6"
           strokeDasharray="1600" strokeDashoffset="1600"
           style={{ animation: "ml 2.5s 0.5s ease-out forwards" }}
           points="310,385 340,375 370,362 400,348 430,330 460,310 490,285 520,262 550,245 580,238 610,245 640,258 670,270 700,282 730,292 760,298 790,302 820,304 850,306"/>
         {candles.map(([cx, wt, wb, bt, bh, color, delay], i) => (
           <g key={i} style={{ animation: `fu 0.2s ${delay}s both` }} filter={i===12||i===13?"url(#gl2)":undefined}>
-            <line x1={cx} y1={wt} x2={cx} y2={wb} stroke={color} strokeWidth={i>=12&&i<=14?"1.5":"1.2"}/>
-            <rect x={Number(cx)-6} y={bt} width={i>=12&&i<=14?16:12} height={bh} fill={color} rx="0.5" opacity="0.9"/>
+            <line x1={cx} y1={wt} x2={cx} y2={wb} stroke={color} stroke={i>=12&&i<=14?"1.5":"1.2"}/>
+            <rect x={Number(cx)-6} y={bt} ={i>=12&&i<=14?16:12} height={bh} fill={color} rx="0.5" opacity="0.9"/>
           </g>
         ))}
         <g style={{ animation: "fu 0.3s 2.02s both" }} filter="url(#gl)">
-          <line x1="826" y1="232" x2="826" y2="278" stroke="#34d399" strokeWidth="1.5"/>
-          <rect x="818" y="236" width="16" height="28" fill="#34d399" rx="1" opacity="0.95"/>
-          <line x1="826" y1="226" x2="826" y2="232" stroke="#34d399" strokeWidth="1.5">
+          <line x1="826" y1="232" x2="826" y2="278" stroke="#34d399" stroke="1.5"/>
+          <rect x="818" y="236" ="16" height="28" fill="#34d399" rx="1" opacity="0.95"/>
+          <line x1="826" y1="226" x2="826" y2="232" stroke="#34d399" stroke="1.5">
             <animate attributeName="opacity" values="0.3;1;0.3" dur="0.9s" repeatCount="indefinite"/>
           </line>
         </g>
@@ -151,39 +151,39 @@ function ChartHero() {
           <animate attributeName="opacity" values="0.8;0;0.8" dur="2s" repeatCount="indefinite"/>
         </circle>
         {volBars.map(([x, y, h, color, opacity, delay], i) => (
-          <rect key={i} x={x} y={y} width={i>=28?"16":"12"} height={h} fill={color} opacity={opacity} rx="0.5"
+          <rect key={i} x={x} y={y} ={i>=28?"16":"12"} height={h} fill={color} opacity={opacity} rx="0.5"
             style={{ transformOrigin: `${Number(x)+6}px 473px`, animation: `vg 0.15s ${delay}s both` }}/>
         ))}
         <g style={{ animation: "fu 0.4s 2.2s both" }}>
           <g style={{ animation: "fy 3s ease-in-out infinite" }}>
-            <rect x="675" y="56" width="92" height="28" rx="5" fill="#7c3aed" opacity="0.95" filter="url(#gl2)"/>
-            <rect x="675" y="56" width="92" height="28" rx="5" fill="none" stroke="#c4b5fd" strokeWidth="0.5" opacity="0.5"/>
+            <rect x="675" y="56" ="92" height="28" rx="5" fill="#7c3aed" opacity="0.95" filter="url(#gl2)"/>
+            <rect x="675" y="56" ="92" height="28" rx="5" fill="none" stroke="#c4b5fd" stroke="0.5" opacity="0.5"/>
             <text x="721" y="75" textAnchor="middle" fill="#fff" fontSize="12" fontFamily="monospace" fontWeight="bold">¥1,928</text>
           </g>
         </g>
         <g style={{ animation: "fu 0.4s 2.4s both" }}>
           <g style={{ animation: "fy 3.5s 0.5s ease-in-out infinite" }}>
-            <rect x="712" y="90" width="66" height="20" rx="4" fill="#34d399" opacity="0.92" filter="url(#gl2)"/>
+            <rect x="712" y="90" ="66" height="20" rx="4" fill="#34d399" opacity="0.92" filter="url(#gl2)"/>
             <text x="745" y="104" textAnchor="middle" fill="#064e3b" fontSize="11" fontFamily="monospace" fontWeight="bold">+3.74%</text>
           </g>
         </g>
         <g style={{ animation: "fu 0.3s 2.6s both" }}>
-          <rect x="495" y="145" width="54" height="16" rx="3" fill="#0d0d1a" stroke="#fbbf24" strokeWidth="0.5" opacity="0.9"/>
+          <rect x="495" y="145" ="54" height="16" rx="3" fill="#0d0d1a" stroke="#fbbf24" stroke="0.5" opacity="0.9"/>
           <text x="522" y="157" textAnchor="middle" fill="#fbbf24" fontSize="9" fontFamily="monospace">5日線</text>
         </g>
         <g style={{ animation: "fu 0.3s 2.8s both" }}>
-          <rect x="495" y="165" width="54" height="16" rx="3" fill="#0d0d1a" stroke="#60a5fa" strokeWidth="0.5" opacity="0.9"/>
+          <rect x="495" y="165" ="54" height="16" rx="3" fill="#0d0d1a" stroke="#60a5fa" stroke="0.5" opacity="0.9"/>
           <text x="522" y="177" textAnchor="middle" fill="#60a5fa" fontSize="9" fontFamily="monospace">25日線</text>
         </g>
-        <rect x="-4" y="50" width="2" height="370" fill="url(#sg)" style={{ animation: "sc 6s 1s linear infinite" }}/>
+        <rect x="-4" y="50" ="2" height="370" fill="url(#sg)" style={{ animation: "sc 6s 1s linear infinite" }}/>
       </svg>
 
       <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right,#0a0a0f 26%,rgba(10,10,15,0.4) 52%,#0a0a0f 100%)", pointerEvents: "none", zIndex: 2 }}/>
       <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom,#0a0a0f 0%,transparent 10%,transparent 88%,#0a0a0f 100%)", pointerEvents: "none", zIndex: 2 }}/>
 
-      <div style={{ position: "relative", zIndex: 3, padding: "clamp(40px,8vw,72px) clamp(10px,4vw,44px)", maxWidth: 620 }}>
+      <div style={{ position: "relative", zIndex: 3, padding: "clamp(40px,8vw,72px) clamp(10px,4vw,44px)", max: 620 }}>
         <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(20,20,40,0.92)", border: "1px solid #3a2a6a", borderRadius: 20, padding: "5px 14px", marginBottom: 20, opacity: 0, animation: "ci 0.5s 0.3s ease-out forwards" }}>
-          <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#c4b5fd", animation: "dp 1.8s infinite" }}/>
+          <div style={{ : 7, height: 7, borderRadius: "50%", background: "#c4b5fd", animation: "dp 1.8s infinite" }}/>
           <span style={{ fontSize: 10, color: "#b0a0dd", letterSpacing: "0.15em" }}>INDEPENDENT RESEARCH — 2026</span>
         </div>
         <h1 style={{ fontSize: "clamp(32px,6vw,50px)", fontWeight: 800, lineHeight: 1.05, letterSpacing: "-0.03em", marginBottom: 16, color: "#f0f0ff", fontFamily: "'Hiragino Sans','Noto Sans JP',sans-serif", opacity: 0, animation: "ci 0.6s 0.7s ease-out forwards" }}>
@@ -228,7 +228,7 @@ export default function App() {
       <style>{`
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { margin: 0 !important; padding: 0 !important; background: #0a0a0f; }
-        @media (max-width: 640px) {
+        @media (max-: 640px) {
           .stats-grid { grid-template-columns: repeat(2,1fr) !important; }
           .feature-grid { grid-template-columns: 1fr !important; }
           .insight-grid { grid-template-columns: 1fr !important; }
@@ -336,10 +336,10 @@ export default function App() {
         {/* ボタン */}
  　　 <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", marginTop: 32 }}>
    　 <a href="https://tradercat.site/report/show_market_list.php" style={{textDecoration:'none'}}>
-      <button style={{ background: "#7c3aed", color: "#fff", border: "none", padding: "13px 28px", borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" width: "300px"}}>マーケットデータを見る</button>
+      <button style={{ background: "#7c3aed", color: "#fff", border: "none", padding: "13px 28px", borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" width: 300 }}>マーケットデータを見る</button>
   　  </a>
     　<a href="https://tradercat.site/report/show_company_list.php" style={{textDecoration:'none'}}>
-      <button style={{ background: "transparent", color: "#c4b5fd", border: "1px solid #2a2a4a", padding: "13px 28px", borderRadius: 7, fontSize: 14, cursor: "pointer", fontFamily: "inherit" width: "300px" }}>企業分析を見る</button>
+      <button style={{ background: "transparent", color: "#c4b5fd", border: "1px solid #2a2a4a", padding: "13px 28px", borderRadius: 7, fontSize: 14, cursor: "pointer", fontFamily: "inherit" width: 300p }}>企業分析を見る</button>
   　  </a>
   　</div>
 </div>
