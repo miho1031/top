@@ -235,7 +235,14 @@ export default function App() {
           .nav-pad { padding: 14px 10px !important; }
           .section-pad { padding: 24px 10px 40px !important; }
         }
-      `}</style>
+      `}
+      
+      
+      @media (max-width: 640px) {
+  .btn-full { width: 300px !important; }
+}
+      
+      </style>
 
       {/* Nav */}
       <div className="nav-pad" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 10px", borderBottom: "1px solid #1e1e3a", background: "#0a0a0f" }}>
@@ -336,10 +343,10 @@ export default function App() {
         {/* ボタン */}
  　　 <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", marginTop: 32 }}>
    　 <a href="https://tradercat.site/report/show_market_list.php" style={{textDecoration:'none'}}>
-      <button style={{ background: "#7c3aed", color: "#fff", border: "none", padding: "13px 28px", borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit",  width: 300 }}>マーケットデータを見る</button>
+      <button className="btn-full" style={{ background: "#7c3aed", color: "#fff", border: "none", padding: "13px 28px", borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>マーケットデータを見る</button>
   　  </a>
     　<a href="https://tradercat.site/report/show_company_list.php" style={{textDecoration:'none'}}>
-      <button style={{ background: "transparent", color: "#c4b5fd", border: "1px solid #2a2a4a", padding: "13px 28px", borderRadius: 7, fontSize: 14, cursor: "pointer", fontFamily: "inherit" , width: 300 }}>企業分析を見る</button>
+      <button className="btn-full"　 style={{ background: "transparent", color: "#c4b5fd", border: "1px solid #2a2a4a", padding: "13px 28px", borderRadius: 7, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}>企業分析を見る</button>
   　  </a>
   　</div>
 </div>
