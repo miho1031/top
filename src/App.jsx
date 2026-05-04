@@ -234,14 +234,13 @@ export default function App() {
           .insight-grid { grid-template-columns: 1fr !important; }
           .nav-pad { padding: 14px 10px !important; }
           .section-pad { padding: 24px 10px 40px !important; }
+           .btn-full { width: 300px !important; }
         }
       `}
+
+   
       
-      
-      @media (max-width: 640px) {
-  .btn-full { width: 300px !important; }
-}
-      
+   
       </style>
 
       {/* Nav */}
@@ -341,14 +340,14 @@ export default function App() {
         </div>
   
         {/* ボタン */}
- 　　 <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", marginTop: 32 }}>
-   　 <a href="https://tradercat.site/report/show_market_list.php" style={{textDecoration:'none'}}>
-      <button className="btn-full" style={{ background: "#7c3aed", color: "#fff", border: "none", padding: "13px 28px", borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>マーケットデータを見る</button>
-  　  </a>
-    　<a href="https://tradercat.site/report/show_company_list.php" style={{textDecoration:'none'}}>
-      <button className="btn-full"　 style={{ background: "transparent", color: "#c4b5fd", border: "1px solid #2a2a4a", padding: "13px 28px", borderRadius: 7, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}>企業分析を見る</button>
-  　  </a>
-  　</div>
+     <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", marginTop: 32 }}>
+     <a href="https://tradercat.site/report/show_market_list.php" style={{textDecoration:'none'}}>
+       <button className="btn-full" style={{ background: "#7c3aed", color: "#fff", border: "none", padding: "13px 28px", borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>マーケットデータを見る</button>
+     </a>
+     <a href="https://tradercat.site/report/show_company_list.php" style={{textDecoration:'none'}}>
+      <button className="btn-full"　style={{ background: "transparent", color: "#c4b5fd", border: "1px solid #2a2a4a", padding: "13px 28px", borderRadius: 7, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}>企業分析を見る</button>
+     </a>
+   </div>
 </div>
       {/* Insights */}
       <div className="section-pad" style={{ padding: "24px 40px 56px", borderTop: "1px solid #1e1e3a" }}>
