@@ -310,7 +310,7 @@ export default function App() {
               トレードの判断材料になるデータを、すぐ開けて、すぐ使える形に。<span style={{ color: "#c4b5fd", fontWeight: 700 }}>投資家自身が作った、投資家のためのデータサイトです。</span>
             </p>
           </div>
-        {/* </div> */}
+        </div> 
       </div>
 
       {/* Features */}
