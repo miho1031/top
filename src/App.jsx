@@ -96,18 +96,18 @@ function ChartHero() {
   ];
 
   return (
-    <div style={{ position: "relative", width: "100%", minHeight: 480, overflow: "hidden", background: "#0a0a0f", display: "flex", alignItems: "center" }}>
+    <div style={{ position: "relative", width: "", minHeight: 480, overflow: "hidden", background: "#0a0a0f", display: "flex", alignItems: "center" }}>
       <style>{`
         @keyframes ci{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
         @keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-        @keyframes fy{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-        @keyframes sc{0%{transform:translateX(-4px)}100%{transform:translateX(910px)}}
+        @keyframes fy{0%,{transform:translateY(0)}50%{transform:translateY(-5px)}}
+        @keyframes sc{0%{transform:translateX(-4px)}{transform:translateX(910px)}}
         @keyframes ml{from{stroke-dashoffset:1600}to{stroke-dashoffset:0}}
         @keyframes vg{from{transform:scaleY(0);opacity:0}to{transform:scaleY(1);opacity:1}}
-        @keyframes dp{0%,100%{opacity:1}50%{opacity:0.25}}
+        @keyframes dp{0%,{opacity:1}50%{opacity:0.25}}
       `}</style>
 
-      <svg style={{ position: "absolute", inset: 0, : "100%", height: "100%" }} viewBox="0 0 900 520" preserveAspectRatio="xMidYMid slice">
+      <svg style={{ position: "absolute", inset: 0, widht: "100%", height: "100%" }} viewBox="0 0 900 520" preserveAspectRatio="xMidYMid slice">
         <defs>
           <linearGradient id="sg" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="transparent"/>
