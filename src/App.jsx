@@ -318,8 +318,8 @@ export default function App() {
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 0%,rgba(124,58,237,0.05) 0%,transparent 60%)", pointerEvents: "none" }}/>
         <div style={{ position: "relative", zIndex: 1 }}>
           <div style={{ fontSize: 10, letterSpacing: "0.3em", color: "#8080aa", textTransform: "uppercase", marginBottom: 14 }}>For serious investors</div>
-          <div style={{ fontSize: "clamp(22px,4vw,32px)", fontWeight: 800, color: "#e8e8f0", marginBottom: 10, letterSpacing: "-0.02em", lineHeight: 1.2 }}>プロが見落とす、<br/>構造的優位を掴め。</div>
-          <p style={{ fontSize: 14, color: "#9090bb", marginBottom: 28 }}>独立系リサーチャーによる、忖度なき企業分析。</p>
+          <div style={{ fontSize: "clamp(22px,4vw,32px)", fontWeight: 800, color: "#e8e8f0", marginBottom: 10, letterSpacing: "-0.02em", lineHeight: 1.2 }}>データを見れば<br/>世界がわかる</div>
+          <p style={{ fontSize: 14, color: "#9090bb", marginBottom: 28 }}>日々の暮らしから見える経済</p>
           <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
             <a href="https://tradercat.site/report/show_market_list.php" style={{textDecoration:'none'}}>
               <button style={{ background: "#7c3aed", color: "#fff", border: "none", padding: "13px 28px", borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>マーケットデータを見る</button>
