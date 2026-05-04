@@ -292,12 +292,12 @@ export default function App() {
               <img src="画像のURL" style={{width:"100%", borderRadius:12, display:"block"}} alt="TraderCatの使い方"/>
               に差し替えてください */}
           <div style={{ flex: "0 0 340px", height: 220, borderRadius: 12, background: "linear-gradient(135deg,#0d0d1a,#1a0a2e)", border: "1px solid #2a1a4a", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden" }}>
-            <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle at 30% 50%,rgba(124,58,237,.2) 0%,transparent 60%),radial-gradient(circle at 80% 30%,rgba(59,130,246,.1) 0%,transparent 50%)" }}/>
+            {/* <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle at 30% 50%,rgba(124,58,237,.2) 0%,transparent 60%),radial-gradient(circle at 80% 30%,rgba(59,130,246,.1) 0%,transparent 50%)" }}/>
             <div style={{ position: "relative", textAlign: "center" }}>
               <div style={{ fontSize: 48, marginBottom: 10 }}>📊</div>
               <div style={{ fontSize: 11, color: "#c4b5fd", letterSpacing: "0.15em", fontWeight: 700 }}>MARKET DATA VISUALIZATION</div>
             </div>
-          </div>
+          </div> */}
 
           {/* テキスト */}
           <div style={{ flex: 1, minWidth: 260 }}>
