@@ -237,8 +237,8 @@ export default function App() {
         {[
           { num: "約3,900社", label: "日本の上場会社数", sub: "JAPAN LISTED" },
           { num: "約5,500社", label: "米国の上場会社数", sub: "US LISTED" },
-          { num: "663兆円", label: "日本のGDP（名目）", sub: "JAPAN GDP 2025" },
-          { num: "30兆7,670億$", label: "米国のGDP（名目）", sub: "US GDP 2025" },
+          { num: "約663兆円", label: "日本のGDP（名目）", sub: "JAPAN GDP 2025" },
+          { num: "約30.6兆ドル", label: "米国のGDP（名目）", sub: "US GDP 2025" },
         ].map((s, i) => (
           <div key={i} style={{ padding: "22px 0", textAlign: "center", borderRight: i < 3 ? "1px solid #1e1e3a" : "none" }}>
             <div style={{ fontSize: "clamp(20px,4vw,28px)", fontWeight: 800, color: "#c4b5fd", letterSpacing: "-0.02em" }}>{s.num}</div>
