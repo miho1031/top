@@ -300,7 +300,7 @@ export default function App() {
       </div>
 
       {/* Insights */}
-      <div className="section-pad" style={{ padding: "24px 40px 56px", borderTop: "1px solid #1e1e3a" }}>
+      /*<div className="section-pad" style={{ padding: "24px 40px 56px", borderTop: "1px solid #1e1e3a" }}>
         <div style={{ fontSize: 10, letterSpacing: "0.3em", color: "#8080aa", textTransform: "uppercase", marginBottom: 10 }}>Key Insight</div>
         <div style={{ fontSize: "clamp(20px,4vw,26px)", fontWeight: 700, color: "#e8e8f0", marginBottom: 28, letterSpacing: "-0.02em" }}></div>
         <div className="insight-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 10 }}>
@@ -311,7 +311,7 @@ export default function App() {
             </div>
           ))}
         </div>
-      </div>
+      </div>*/
 
       {/* CTA */}
       <div className="section-pad" style={{ padding: "64px 40px", textAlign: "center", borderTop: "1px solid #1e1e3a", position: "relative", overflow: "hidden" }}>
