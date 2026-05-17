@@ -181,10 +181,10 @@ const features = [
 ];
 
 const insights = [
-  { title: "「縁の下の力持ち」戦略", body: "日本はチップそのものより装置・材料で世界を支配。信越化学・SUMCO・ディスコはNVIDIAやTSMCなしに機能しない。", color: "#22c55e" },
-  { title: "Rapidusは中長期の賭け", body: "2027年2nm量産目標。出資企業（トヨタ・ソニー等）や装置供給企業（TEL・レーザーテック）が間接的な受益者。", color: "#60a5fa" },
-  { title: "AI需要の直撃銘柄", body: "アドバンテスト（HBMテスト首位）・ディスコ（後工程独占）・レーザーテック（EUVマスク唯一）はAIブームの恩恵が直接届く。", color: "#fbbf24" },
-  { title: "パワー半導体はEV次第", body: "ローム・富士電機のSiC/IGBTはEV普及速度に連動。地政学リスクは低く長期成長テーマ。", color: "#f97316" },
+  { title: "", body: "", color: "#22c55e" },
+  { title: "", body: "", color: "#60a5fa" },
+  { title: "", body: "", color: "#fbbf24" },
+  { title: "", body: "", color: "#f97316" },
 ];
 
 export default function App() {
@@ -302,7 +302,7 @@ export default function App() {
       {/* Insights */}
       <div className="section-pad" style={{ padding: "24px 40px 56px", borderTop: "1px solid #1e1e3a" }}>
         <div style={{ fontSize: 10, letterSpacing: "0.3em", color: "#8080aa", textTransform: "uppercase", marginBottom: 10 }}>Key Insight</div>
-        <div style={{ fontSize: "clamp(20px,4vw,26px)", fontWeight: 700, color: "#e8e8f0", marginBottom: 28, letterSpacing: "-0.02em" }}>投資家向け視点</div>
+        <div style={{ fontSize: "clamp(20px,4vw,26px)", fontWeight: 700, color: "#e8e8f0", marginBottom: 28, letterSpacing: "-0.02em" }}></div>
         <div className="insight-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 10 }}>
           {insights.map(ins => (
             <div key={ins.title} style={{ background: "#0d0d1a", border: `1px solid ${ins.color}20`, borderRadius: 10, padding: "16px 18px" }}>
