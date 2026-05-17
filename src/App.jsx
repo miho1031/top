@@ -309,21 +309,14 @@ export default function App() {
           <div style={{ fontSize: 10, letterSpacing: "0.3em", color: "#8080aa", textTransform: "uppercase", marginBottom: 14 }}>For serious investors</div>
           <div style={{ fontSize: "clamp(22px,4vw,32px)", fontWeight: 800, color: "#e8e8f0", marginBottom: 10, letterSpacing: "-0.02em", lineHeight: 1.2 }}>データを見れば<br/>世界がわかる</div>
           <p style={{ fontSize: 14, color: "#9090bb", marginBottom: 28 }}>日々の暮らしから見える経済</p>
-          <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-            <a href="https://tradercat.site/report/show_market_list.php" style={{textDecoration:'none'}}>
-              <button style={{ background: "#7c3aed", color: "#fff", border: "none", padding: "13px 28px", borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>マーケットデータを見る</button>
-            </a>
-            <a href="https://tradercat.site/report/show_company_list.php" style={{textDecoration:'none'}}>
-              <button style={{ background: "transparent", color: "#c4b5fd", border: "1px solid #2a2a4a", padding: "13px 28px", borderRadius: 7, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}>企業分析を見る</button>
-            </a>
-          </div>
+        
         </div>
       </div>
 
       {/* Footer */}
       <div style={{ padding: "20px 40px", borderTop: "1px solid #1e1e3a", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 8 }}>
-        <span style={{ fontSize: 11, color: "#2a2a4a", letterSpacing: "0.05em" }}>© 2026 TraderCat — Independent Market Intelligence</span>
-        <span style={{ fontSize: 11, color: "#2a2a4a" }}>tradercat.site</span>
+        <span style={{ fontSize: 11, color: "#a5a5d5", letterSpacing: "0.05em" }}>© 2026 TraderCat — Independent Market Intelligence</span>
+        <span style={{ fontSize: 11, color: "#a5a5d5" }}>tradercat.site</span>
       </div>
     </div>
   );
