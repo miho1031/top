@@ -183,7 +183,7 @@ function ChartHero() {
 const features = [
   { color: "#4c1d95", bg: "#ede9fe", title: "日本の半導体バリューチェーン", body: "ファブレスからファウンドリ、装置・素材まで、バリューチェーン構造を視覚的に俯瞰。日本の半導体産業まとめ 企業名をタップで詳細展開", tag: "Japan · 17社", url: "https://japansemicondu.netlify.app/" },
   { color: "#7c3aed", bg: "#f5f3ff", title: "世界の半導体バリューチェーン", body: "ファブレスからファウンドリ、装置・素材まで、バリューチェーン構造を視覚的に俯瞰。世界の半導体産業まとめ　企業名をタップで詳細展開", tag: "Global · 150社", url: "https://teal-melomakarona-306990.netlify.app/" },
-  { color: "#f59e0b", bg: "#fffbeb", title: "日本株・信用残高一覧", body: "直近の信用残高のまとめ、複数銘柄を比較検討できる便利機能つき", tag: "Japan · 信用残", url: "https://tradercat.site/report/show_margin.php" },
+  { color: "#10b981", bg: "#ecfdf5", title: "日本株 設立・上場年一覧", body: "東証上場3,900社以上の設立年・上場年を一覧で確認。業種・周年フィルター付き。", tag: "Japan · 3,900社", url: "https://tradercat.site/report/show_japanmarket.php" },
 ];
 
 export default function App() {
