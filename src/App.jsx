@@ -1,22 +1,23 @@
 import { useEffect, useRef } from "react";
 
-// ── 案2カラー定数 ──────────────────────────────────────
+// ── 案Fカラー定数 ──────────────────────────────────────
 const C = {
-  bg:        "#f8f9fb",
+  bg:        "#faf9ff",
   card:      "#ffffff",
-  border:    "#e2e6ed",
-  borderDark:"#cbd5e1",
+  border:    "#ede9fe",
+  borderMid: "#c4b5fd",
   text:      "#1e293b",
   textSub:   "#64748b",
-  textMuted: "#94a3b8",
-  accent:    "#1e3a5f",
-  accentSub: "#3b82f6",
+  textMuted: "#a78bfa",
+  accent:    "#4c1d95",
+  accentSub: "#7c3aed",
+  btn:       "#6d28d9",
   plus:      "#10b981",
   minus:     "#ef4444",
   navBg:     "#ffffff",
 };
 
-// ── Candlestick Hero（ダークのまま維持） ────────────────
+// ── Candlestick Hero（ダーク維持） ──────────────────────
 function ChartHero() {
   const candles = [
     ["310","370","384","374","10","#34d399","0.08"],
@@ -70,7 +71,7 @@ function ChartHero() {
   ];
 
   return (
-    <div style={{ position: "relative", width: "100%", minHeight: 480, overflow: "hidden", background: "#0f172a", display: "flex", alignItems: "center" }}>
+    <div style={{ position: "relative", width: "100%", minHeight: 480, overflow: "hidden", background: "#150e2a", display: "flex", alignItems: "center" }}>
       <style>{`
         @keyframes ci{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
         @keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
@@ -84,25 +85,25 @@ function ChartHero() {
         <defs>
           <linearGradient id="sg" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="transparent"/>
-            <stop offset="40%" stopColor="#3b82f6" stopOpacity="0.4"/>
-            <stop offset="60%" stopColor="#3b82f6" stopOpacity="0.4"/>
+            <stop offset="40%" stopColor="#7c3aed" stopOpacity="0.4"/>
+            <stop offset="60%" stopColor="#7c3aed" stopOpacity="0.4"/>
             <stop offset="100%" stopColor="transparent"/>
           </linearGradient>
           <filter id="gl"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
           <filter id="gl2"><feGaussianBlur stdDeviation="1.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
         </defs>
         <g opacity="0.1">
-          {[75,155,235,315,395].map(y => <line key={y} x1="0" y1={y} x2="900" y2={y} stroke="#94a3b8" strokeWidth="0.5"/>)}
-          {[200,380,560,740].map(x => <line key={x} x1={x} y1="50" x2={x} y2="420" stroke="#94a3b8" strokeWidth="0.5"/>)}
+          {[75,155,235,315,395].map(y => <line key={y} x1="0" y1={y} x2="900" y2={y} stroke="#a78bfa" strokeWidth="0.5"/>)}
+          {[200,380,560,740].map(x => <line key={x} x1={x} y1="50" x2={x} y2="420" stroke="#a78bfa" strokeWidth="0.5"/>)}
         </g>
         {[["5000","79"],["3800","159"],["2600","239"],["1400","319"]].map(([v,y]) => (
-          <text key={v} x="856" y={y} fill="#64748b" fontSize="10" fontFamily="monospace">{v}</text>
+          <text key={v} x="856" y={y} fill="#6d28d9" fontSize="10" fontFamily="monospace">{v}</text>
         ))}
         <polyline fill="none" stroke="#fbbf24" strokeWidth="2" strokeLinejoin="round" opacity="0.85"
           strokeDasharray="1600" strokeDashoffset="1600"
           style={{ animation: "ml 2.5s 0.2s ease-out forwards" }}
           points="310,365 326,358 342,352 358,340 374,330 390,344 406,320 422,308 438,295 454,318 470,285 486,260 502,220 520,168 538,130 556,175 574,225 592,205 610,240 628,270 646,248 664,280 682,258 700,285 718,262 736,278 754,255 772,268 790,252 808,265 826,248"/>
-        <polyline fill="none" stroke="#60a5fa" strokeWidth="1.5" strokeLinejoin="round" opacity="0.6"
+        <polyline fill="none" stroke="#c4b5fd" strokeWidth="1.5" strokeLinejoin="round" opacity="0.6"
           strokeDasharray="1600" strokeDashoffset="1600"
           style={{ animation: "ml 2.5s 0.5s ease-out forwards" }}
           points="310,385 340,375 370,362 400,348 430,330 460,310 490,285 520,262 550,245 580,238 610,245 640,258 670,270 700,282 730,292 760,298 790,302 820,304 850,306"/>
@@ -129,8 +130,8 @@ function ChartHero() {
         ))}
         <g style={{ animation: "fu 0.4s 2.2s both" }}>
           <g style={{ animation: "fy 3s ease-in-out infinite" }}>
-            <rect x="675" y="56" width="92" height="28" rx="5" fill="#1e3a5f" opacity="0.95" filter="url(#gl2)"/>
-            <rect x="675" y="56" width="92" height="28" rx="5" fill="none" stroke="#3b82f6" strokeWidth="0.5" opacity="0.5"/>
+            <rect x="675" y="56" width="92" height="28" rx="5" fill="#4c1d95" opacity="0.95" filter="url(#gl2)"/>
+            <rect x="675" y="56" width="92" height="28" rx="5" fill="none" stroke="#c4b5fd" strokeWidth="0.5" opacity="0.5"/>
             <text x="721" y="75" textAnchor="middle" fill="#fff" fontSize="12" fontFamily="monospace" fontWeight="bold">¥1,928</text>
           </g>
         </g>
@@ -141,37 +142,37 @@ function ChartHero() {
           </g>
         </g>
         <g style={{ animation: "fu 0.3s 2.6s both" }}>
-          <rect x="495" y="145" width="54" height="16" rx="3" fill="#0f172a" stroke="#fbbf24" strokeWidth="0.5" opacity="0.9"/>
+          <rect x="495" y="145" width="54" height="16" rx="3" fill="#150e2a" stroke="#fbbf24" strokeWidth="0.5" opacity="0.9"/>
           <text x="522" y="157" textAnchor="middle" fill="#fbbf24" fontSize="9" fontFamily="monospace">5日線</text>
         </g>
         <g style={{ animation: "fu 0.3s 2.8s both" }}>
-          <rect x="495" y="165" width="54" height="16" rx="3" fill="#0f172a" stroke="#60a5fa" strokeWidth="0.5" opacity="0.9"/>
-          <text x="522" y="177" textAnchor="middle" fill="#60a5fa" fontSize="9" fontFamily="monospace">25日線</text>
+          <rect x="495" y="165" width="54" height="16" rx="3" fill="#150e2a" stroke="#c4b5fd" strokeWidth="0.5" opacity="0.9"/>
+          <text x="522" y="177" textAnchor="middle" fill="#c4b5fd" fontSize="9" fontFamily="monospace">25日線</text>
         </g>
         <rect x="-4" y="50" width="2" height="370" fill="url(#sg)" style={{ animation: "sc 6s 1s linear infinite" }}/>
       </svg>
-      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right,#0f172a 26%,rgba(15,23,42,0.4) 52%,#0f172a 100%)", pointerEvents: "none", zIndex: 2 }}/>
-      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom,#0f172a 0%,transparent 10%,transparent 88%,#0f172a 100%)", pointerEvents: "none", zIndex: 2 }}/>
+      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right,#150e2a 26%,rgba(21,14,42,0.4) 52%,#150e2a 100%)", pointerEvents: "none", zIndex: 2 }}/>
+      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom,#150e2a 0%,transparent 10%,transparent 88%,#150e2a 100%)", pointerEvents: "none", zIndex: 2 }}/>
       <div style={{ position: "relative", zIndex: 3, padding: "clamp(40px,8vw,72px) clamp(10px,4vw,44px)", maxWidth: 620 }}>
-        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(30,58,95,0.9)", border: "1px solid #3b82f6", borderRadius: 20, padding: "5px 14px", marginBottom: 20, opacity: 0, animation: "ci 0.5s 0.3s ease-out forwards" }}>
-          <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#3b82f6", animation: "dp 1.8s infinite" }}/>
-          <span style={{ fontSize: 10, color: "#93c5fd", letterSpacing: "0.15em" }}>INDEPENDENT RESEARCH — 2026</span>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(76,29,149,0.85)", border: "1px solid #7c3aed", borderRadius: 20, padding: "5px 14px", marginBottom: 20, opacity: 0, animation: "ci 0.5s 0.3s ease-out forwards" }}>
+          <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#c4b5fd", animation: "dp 1.8s infinite" }}/>
+          <span style={{ fontSize: 10, color: "#e9d5ff", letterSpacing: "0.15em" }}>INDEPENDENT RESEARCH — 2026</span>
         </div>
-        <h1 style={{ fontSize: "clamp(32px,6vw,50px)", fontWeight: 800, lineHeight: 1.05, letterSpacing: "-0.03em", marginBottom: 16, color: "#f1f5f9", fontFamily: "'Hiragino Sans','Noto Sans JP',sans-serif", opacity: 0, animation: "ci 0.6s 0.7s ease-out forwards" }}>
+        <h1 style={{ fontSize: "clamp(32px,6vw,50px)", fontWeight: 800, lineHeight: 1.05, letterSpacing: "-0.03em", marginBottom: 16, color: "#f5f3ff", fontFamily: "'Hiragino Sans','Noto Sans JP',sans-serif", opacity: 0, animation: "ci 0.6s 0.7s ease-out forwards" }}>
           ミル。シル。トウシ。<br/>
-          <span style={{ background: "linear-gradient(90deg,#93c5fd,#60a5fa,#3b82f6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+          <span style={{ background: "linear-gradient(90deg,#e9d5ff,#c4b5fd,#a78bfa)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
             データで見える、<br/>値段の裏側。
           </span>
         </h1>
-        <p style={{ fontSize: "clamp(13px,2vw,15px)", color: "#94a3b8", lineHeight: 1.8, marginBottom: 28, fontFamily: "'Hiragino Sans','Noto Sans JP',sans-serif", opacity: 0, animation: "ci 0.5s 1.2s ease-out forwards" }}>
+        <p style={{ fontSize: "clamp(13px,2vw,15px)", color: "#c4b5fd", lineHeight: 1.8, marginBottom: 28, fontFamily: "'Hiragino Sans','Noto Sans JP',sans-serif", opacity: 0, animation: "ci 0.5s 1.2s ease-out forwards" }}>
           只今制作中<br/>今しばらくお待ちください
         </p>
         <div style={{ display: "flex", gap: 12, flexWrap: "wrap", opacity: 0, animation: "ci 0.5s 1.6s ease-out forwards" }}>
           <a href="https://tradercat.site/report/show_market_list.php" style={{textDecoration:'none'}}>
-            <button style={{ background: "#1e3a5f", color: "#fff", border: "none", padding: "13px 26px", borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>マーケットデータを見る</button>
+            <button style={{ background: "#6d28d9", color: "#fff", border: "none", padding: "13px 26px", borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>マーケットデータを見る</button>
           </a>
           <a href="https://tradercat.site/report/show_company_list.php" style={{textDecoration:'none'}}>
-            <button style={{ background: "transparent", color: "#93c5fd", border: "1px solid #3b82f6", padding: "13px 26px", borderRadius: 7, fontSize: 14, cursor: "pointer", fontFamily: "'Hiragino Sans',sans-serif" }}>企業分析を見る</button>
+            <button style={{ background: "transparent", color: "#e9d5ff", border: "1px solid #7c3aed", padding: "13px 26px", borderRadius: 7, fontSize: 14, cursor: "pointer", fontFamily: "'Hiragino Sans',sans-serif" }}>企業分析を見る</button>
           </a>
         </div>
       </div>
@@ -180,8 +181,8 @@ function ChartHero() {
 }
 
 const features = [
-  { color: "#1e3a5f", bg: "#eff6ff", title: "日本の半導体バリューチェーン", body: "ファブレスからファウンドリ、装置・素材まで、バリューチェーン構造を視覚的に俯瞰。日本の半導体産業まとめ 企業名をタップで詳細展開", tag: "Japan · 17社", url: "https://japansemicondu.netlify.app/" },
-  { color: "#3b82f6", bg: "#eff6ff", title: "世界の半導体バリューチェーン", body: "ファブレスからファウンドリ、装置・素材まで、バリューチェーン構造を視覚的に俯瞰。世界の半導体産業まとめ　企業名をタップで詳細展開", tag: "Global · 150社", url: "https://teal-melomakarona-306990.netlify.app/" },
+  { color: "#4c1d95", bg: "#ede9fe", title: "日本の半導体バリューチェーン", body: "ファブレスからファウンドリ、装置・素材まで、バリューチェーン構造を視覚的に俯瞰。日本の半導体産業まとめ 企業名をタップで詳細展開", tag: "Japan · 17社", url: "https://japansemicondu.netlify.app/" },
+  { color: "#7c3aed", bg: "#f5f3ff", title: "世界の半導体バリューチェーン", body: "ファブレスからファウンドリ、装置・素材まで、バリューチェーン構造を視覚的に俯瞰。世界の半導体産業まとめ　企業名をタップで詳細展開", tag: "Global · 150社", url: "https://teal-melomakarona-306990.netlify.app/" },
   { color: "#f59e0b", bg: "#fffbeb", title: "日本株・信用残高一覧", body: "直近の信用残高のまとめ、複数銘柄を比較検討できる便利機能つき", tag: "Japan · 信用残", url: "https://tradercat.site/report/show_margin.php" },
 ];
 
@@ -201,19 +202,19 @@ export default function App() {
       `}</style>
 
       {/* Nav */}
-      <div className="nav-pad" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 24px", borderBottom: `1px solid ${C.border}`, background: C.navBg, boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
+      <div className="nav-pad" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 24px", borderBottom: `1px solid ${C.border}`, background: C.navBg, boxShadow: "0 1px 3px rgba(124,58,237,0.08)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-            <rect width="30" height="30" rx="6" fill="#1e3a5f"/>
-            <rect x="5" y="13" width="4" height="4" rx="0.5" fill="#3b82f6" opacity="0.6"/>
-            <rect x="13" y="5" width="4" height="4" rx="0.5" fill="#3b82f6" opacity="0.6"/>
-            <rect x="13" y="13" width="4" height="4" rx="0.5" fill="#93c5fd"/>
-            <rect x="21" y="13" width="4" height="4" rx="0.5" fill="#3b82f6" opacity="0.6"/>
-            <rect x="13" y="21" width="4" height="4" rx="0.5" fill="#3b82f6" opacity="0.6"/>
-            <line x1="9" y1="15" x2="13" y2="15" stroke="#1e40af" strokeWidth="1"/>
-            <line x1="17" y1="15" x2="21" y2="15" stroke="#1e40af" strokeWidth="1"/>
-            <line x1="15" y1="9" x2="15" y2="13" stroke="#1e40af" strokeWidth="1"/>
-            <line x1="15" y1="17" x2="15" y2="21" stroke="#1e40af" strokeWidth="1"/>
+            <rect width="30" height="30" rx="6" fill="#4c1d95"/>
+            <rect x="5" y="13" width="4" height="4" rx="0.5" fill="#7c3aed" opacity="0.6"/>
+            <rect x="13" y="5" width="4" height="4" rx="0.5" fill="#7c3aed" opacity="0.6"/>
+            <rect x="13" y="13" width="4" height="4" rx="0.5" fill="#e9d5ff"/>
+            <rect x="21" y="13" width="4" height="4" rx="0.5" fill="#7c3aed" opacity="0.6"/>
+            <rect x="13" y="21" width="4" height="4" rx="0.5" fill="#7c3aed" opacity="0.6"/>
+            <line x1="9" y1="15" x2="13" y2="15" stroke="#3b0764" strokeWidth="1"/>
+            <line x1="17" y1="15" x2="21" y2="15" stroke="#3b0764" strokeWidth="1"/>
+            <line x1="15" y1="9" x2="15" y2="13" stroke="#3b0764" strokeWidth="1"/>
+            <line x1="15" y1="17" x2="15" y2="21" stroke="#3b0764" strokeWidth="1"/>
           </svg>
           <div>
             <div style={{ fontSize: 15, fontWeight: 800, letterSpacing: "0.06em", color: C.accent }}>TraderCat</div>
@@ -221,7 +222,7 @@ export default function App() {
           </div>
         </div>
         <a href="https://tradercat.site/report/show_market_list.php" style={{textDecoration:'none'}}>
-          <button style={{ fontSize: 12, border: `1px solid ${C.borderDark}`, background: "transparent", color: C.accent, padding: "7px 16px", borderRadius: 5, cursor: "pointer", letterSpacing: "0.05em", fontFamily: "inherit", fontWeight: 600 }}>
+          <button style={{ fontSize: 12, border: `1px solid ${C.border}`, background: "transparent", color: C.accent, padding: "7px 16px", borderRadius: 5, cursor: "pointer", letterSpacing: "0.05em", fontFamily: "inherit", fontWeight: 600 }}>
             レポートを見る
           </button>
         </a>
@@ -238,7 +239,7 @@ export default function App() {
           { num: "約30.6兆ドル", label: "米国のGDP（名目）", sub: "US GDP 2025" },
         ].map((s, i) => (
           <div key={i} style={{ padding: "22px 0", textAlign: "center", borderRight: i < 3 ? `1px solid ${C.border}` : "none" }}>
-            <div style={{ fontSize: "clamp(18px,3.5vw,26px)", fontWeight: 800, color: C.accent, letterSpacing: "-0.02em" }}>{s.num}</div>
+            <div style={{ fontSize: "clamp(18px,3.5vw,26px)", fontWeight: 800, color: i % 2 === 0 ? C.accent : C.accentSub, letterSpacing: "-0.02em" }}>{s.num}</div>
             <div style={{ fontSize: "clamp(9px,1.8vw,12px)", color: C.text, marginTop: 4 }}>{s.label}</div>
             <div style={{ fontSize: "clamp(7px,1.2vw,9px)", color: C.textMuted, letterSpacing: "0.08em", marginTop: 2 }}>{s.sub}</div>
           </div>
@@ -274,7 +275,7 @@ export default function App() {
         <div className="feature-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 12 }}>
           {features.map(f => (
             <a key={f.title} href={f.url} target="_blank" style={{textDecoration:'none',color:'inherit'}}>
-              <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 10, padding: "20px", position: "relative", overflow: "hidden", boxShadow: "0 1px 4px rgba(0,0,0,0.05)", transition: "box-shadow 0.2s" }}>
+              <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 10, padding: "20px", position: "relative", overflow: "hidden", boxShadow: "0 1px 4px rgba(124,58,237,0.06)" }}>
                 <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: f.color }}/>
                 <div style={{ width: 32, height: 32, borderRadius: 6, background: f.bg, marginBottom: 12, border: `1px solid ${f.color}30` }}/>
                 <div style={{ fontSize: 13, fontWeight: 700, color: C.text, marginBottom: 6 }}>{f.title}</div>
@@ -288,7 +289,7 @@ export default function App() {
         {/* ボタン */}
         <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", marginTop: 36 }}>
           <a href="https://tradercat.site/report/show_market_list.php" style={{textDecoration:'none'}}>
-            <button className="btn-full" style={{ background: C.accent, color: "#fff", border: "none", padding: "13px 28px", borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>マーケットデータを見る</button>
+            <button className="btn-full" style={{ background: C.btn, color: "#fff", border: "none", padding: "13px 28px", borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>マーケットデータを見る</button>
           </a>
           <a href="https://tradercat.site/report/show_company_list.php" style={{textDecoration:'none'}}>
             <button className="btn-full" style={{ background: "transparent", color: C.accentSub, border: `1px solid ${C.accentSub}`, padding: "13px 28px", borderRadius: 7, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}>企業分析を見る</button>
@@ -297,7 +298,7 @@ export default function App() {
       </div>
 
       {/* CTA */}
-      <div className="section-pad" style={{ padding: "64px 40px", textAlign: "center", borderTop: `1px solid ${C.border}`, background: "#eff6ff", position: "relative", overflow: "hidden" }}>
+      <div className="section-pad" style={{ padding: "64px 40px", textAlign: "center", borderTop: `1px solid ${C.border}`, background: "#f5f3ff", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "relative", zIndex: 1 }}>
           <div style={{ fontSize: 10, letterSpacing: "0.3em", color: C.textMuted, textTransform: "uppercase", marginBottom: 14 }}>For serious investors</div>
           <div style={{ fontSize: "clamp(22px,4vw,32px)", fontWeight: 800, color: C.accent, marginBottom: 10, letterSpacing: "-0.02em", lineHeight: 1.2 }}>データを見れば<br/>世界がわかる</div>
