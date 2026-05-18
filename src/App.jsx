@@ -159,7 +159,7 @@ function ChartHero() {
           <span style={{ fontSize: 10, color: "#e9d5ff", letterSpacing: "0.15em" }}>INDEPENDENT RESEARCH — 2026</span>
         </div>
         <h1 style={{ fontSize: "clamp(32px,6vw,50px)", fontWeight: 800, lineHeight: 1.05, letterSpacing: "-0.03em", marginBottom: 16, color: "#f5f3ff", fontFamily: "'Hiragino Sans','Noto Sans JP',sans-serif", opacity: 0, animation: "ci 0.6s 0.7s ease-out forwards" }}>
-          ミル。シル。トウシ。<br/>
+          ミル。シル。<br/>
           <span style={{ background: "linear-gradient(90deg,#e9d5ff,#c4b5fd,#a78bfa)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
             データで見える、<br/>値段の裏側。
           </span>
@@ -257,11 +257,17 @@ export default function App() {
             <div style={{ fontSize: "clamp(20px,4vw,26px)", fontWeight: 700, color: C.text, marginBottom: 16, letterSpacing: "-0.02em", lineHeight: 1.3 }}>
               トレーダーキャットの<span style={{ color: C.accentSub }}>使い方</span>
             </div>
-            <p style={{ fontSize: 13, color: C.textSub, lineHeight: 2, marginBottom: 0 }}>
-              気になる銘柄を調べようとすると、情報は分散していて、まとめサイトは広告だらけ。比較したいのに、比較できるページがない。<br/><br/>
-              そんな日々のストレスから生まれたのがTraderCatです。<br/><br/>
-              トレードの判断材料になるデータを、すぐ開けて、すぐ使える形に。<span style={{ color: C.accentSub, fontWeight: 700 }}>投資家自身が作った、投資家のためのデータサイトです。</span>
-            </p>
+        <p style={{ fontSize: 13, color: C.textSub, lineHeight: 2, marginBottom: 0 }}>
+  相場、物価、企業、消費。<br/>
+  世の中の変化は、すべてどこかで繋がっています。<br/><br/>
+
+  TraderCatは、価格データや統計情報、企業情報を横断して、
+  比較・分析できる独立系データサイトです。<br/><br/>
+
+  「数字を眺める」だけではなく、
+  <span style={{ color: C.accentSub, fontWeight: 700 }}>変化の流れを読み解くための情報基盤</span>
+  を目指しています。
+</p>
           </div>
         </div>
       </div>
