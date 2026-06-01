@@ -167,10 +167,15 @@ function ChartHero() {
         <p style={{ fontSize: "clamp(13px,2vw,15px)", color: "#c4b5fd", lineHeight: 1.8, marginBottom: 28, fontFamily: "'Hiragino Sans','Noto Sans JP',sans-serif", opacity: 0, animation: "ci 0.5s 1.2s ease-out forwards" }}>
           只今制作中<br/>今しばらくお待ちください
         </p>
-<iframe src="https://tradercat.site/report/top_heatmap_entry.html"
-        width="540" height="130" frameborder="0" scrolling="no"
-        style="border:0;max-width:100%"
-        title="ヒートマップ"></iframe>
+<iframe
+  src="https://tradercat.site/report/top_heatmap_entry.html"
+  width="540"
+  height="130"
+  frameBorder="0"
+  scrolling="no"
+  title="ヒートマップ"
+  style={{ border: 0, maxWidth: '100%' }}
+/>
         
         <div style={{ display: "flex", gap: 12, flexWrap: "wrap", opacity: 0, animation: "ci 0.5s 1.6s ease-out forwards" }}>
           <a href="https://tradercat.site/report/show_market_list.php" style={{textDecoration:'none'}}>
